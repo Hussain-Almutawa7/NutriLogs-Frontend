@@ -62,50 +62,61 @@ function Dashboard({ user }) {
 
 
     return (
-        <>
-            <h1>Hello {user.username}</h1>
-            <h2>Today's Nutrition</h2>
+        <main className="dashboard">
 
-            <NutritionCard
-                name="Calories"
-                consumed={summary.today.consumed.calories}
-                goal={summary.goals.calories}
-                remaining={summary.today.remaining.calories}
-                unit="kcal"
-            />
+            <section className="dashboard-header">
+                <h1>Hello {user.username}</h1>
+                <p>Here's your nutrition progress for today</p>
+            </section>
 
-            <NutritionCard
-                name="Protein"
-                consumed={summary.today.consumed.protein}
-                goal={summary.goals.protein}
-                remaining={summary.today.remaining.protein}
-                unit="g"
-            />
+            <section className="nutrition-section">
+                <h2>Today's Nutrition</h2>
 
-            <NutritionCard
-                name="Carbohydrates"
-                consumed={summary.today.consumed.carbohydrates}
-                goal={summary.goals.carbohydrates}
-                remaining={summary.today.remaining.carbohydrates}
-                unit="g"
-            />
+                <div className="nutrition-cards">
+                    <NutritionCard
+                        name="Calories"
+                        consumed={summary.today.consumed.calories}
+                        goal={summary.goals.calories}
+                        remaining={summary.today.remaining.calories}
+                        unit="kcal"
+                    />
 
-            <NutritionCard
-                name="Fat"
-                consumed={summary.today.consumed.fat}
-                goal={summary.goals.fat}
-                remaining={summary.today.remaining.fat}
-                unit="g"
-            />
-            
-            <h2>This Week</h2>
+                    <NutritionCard
+                        name="Protein"
+                        consumed={summary.today.consumed.protein}
+                        goal={summary.goals.protein}
+                        remaining={summary.today.remaining.protein}
+                        unit="g"
+                    />
 
-            {summary.week.map(day => (
-                <div key={day.date}>
-                    {day.date} : {day.calories} calories {day.protein}g {day.carbohydrates}g {day.fat}g
+                    <NutritionCard
+                        name="Carbohydrates"
+                        consumed={summary.today.consumed.carbohydrates}
+                        goal={summary.goals.carbohydrates}
+                        remaining={summary.today.remaining.carbohydrates}
+                        unit="g"
+                    />
+
+                    <NutritionCard
+                        name="Fat"
+                        consumed={summary.today.consumed.fat}
+                        goal={summary.goals.fat}
+                        remaining={summary.today.remaining.fat}
+                        unit="g"
+                    />
                 </div>
-            ))}
-        </>
+            </section>
+
+            <section className="weekly-section">
+                <h2>This Week</h2>
+                {summary.week.map(day => (
+                    <div key={day.date}>
+                        {day.date} : {day.calories} calories {day.protein}g {day.carbohydrates}g {day.fat}g
+                    </div>
+                ))}
+            </section>
+
+        </main>
     )
 }
 

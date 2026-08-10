@@ -6,17 +6,23 @@ function NutritionCard({ name, consumed, goal, remaining, unit }) {
         return Math.min((consumed / goal) * 100, 100)
     }
 
+    const percentage = getPercentage(consumed, goal);
+
     return (
-        <div>
-            <h3>{name}</h3>
+        <div className="nutrition-card">
 
-            <p>{consumed} / {goal} {unit}</p>
+            <div className="nutrition-card-header">
+                <h3>{name}</h3>
+                <span>{percentage.toFixed(0)}%</span>
+            </div>
 
-            <p>
-                Progress: {getPercentage(consumed, goal).toFixed(0)}%
-            </p>
+            <p className="nutrition-value">{consumed} / {goal} {unit}</p>
 
-            <p>Remaining: {remaining} {unit}</p>
+            <div className="progress-bar">
+                <div className="progress-fill" style={{ width: `${percentage}%` }}></div>
+            </div>
+
+            <p className="nutrition-remaining">Remaining: {remaining} {unit}</p>
         </div>
     );
 }
