@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSummary } from "../services/foodLogService";
+import NutritionCard from "../components/NutritionCard";
 
 function Dashboard({ user }) {
 
@@ -65,26 +66,38 @@ function Dashboard({ user }) {
             <h1>Hello {user.username}</h1>
             <h2>Today's Nutrition</h2>
 
-            <p>
-                Calories: {summary.today.consumed.calories} / {summary.goals.calories}g
-            </p>
+            <NutritionCard
+                name="Calories"
+                consumed={summary.today.consumed.calories}
+                goal={summary.goals.calories}
+                unit="kcal"
+            />
 
-            <p>
-                Protien: {summary.today.consumed.protein} / {summary.goals.protein}g
-            </p>
+            <NutritionCard
+                name="Protein"
+                consumed={summary.today.consumed.protein}
+                goal={summary.goals.protein}
+                unit="g"
+            />
 
-            <p>
-                Carbohydrates: {summary.today.consumed.carbohydrates} / {summary.goals.carbohydrates}g
-            </p>
+            <NutritionCard
+                name="Carbohydrates"
+                consumed={summary.today.consumed.carbohydrates}
+                goal={summary.goals.carbohydrates}
+                unit="g"
+            />
 
-            <p>
-                Fat: {summary.today.consumed.fat} / {summary.goals.fat}g
-            </p>
+            <NutritionCard
+                name="Fat"
+                consumed={summary.today.consumed.fat}
+                goal={summary.goals.fat}
+                unit="g"
+            />
 
             <h2>Remaining</h2>
 
             <p>
-                Calories: {summary.today.remaining.calories}
+                Calories: {summary.today.remaining.calories} kcal
             </p>
 
             <p>
@@ -103,7 +116,7 @@ function Dashboard({ user }) {
 
             {summary.week.map(day => (
                 <div key={day.date}>
-                    {day.date} : {day.calories} calories {day.protein}g {day.carbohydrates}g {day.fat}g 
+                    {day.date} : {day.calories} calories {day.protein}g {day.carbohydrates}g {day.fat}g
                 </div>
             ))}
         </>
