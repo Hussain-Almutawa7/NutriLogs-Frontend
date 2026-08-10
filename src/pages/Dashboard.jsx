@@ -63,8 +63,49 @@ function Dashboard({ user }) {
     return (
         <>
             <h1>Hello {user.username}</h1>
-            <p></p>
-            <p></p>
+            <h2>Today's Nutrition</h2>
+
+            <p>
+                Calories: {summary.today.consumed.calories} / {summary.goals.calories}g
+            </p>
+
+            <p>
+                Protien: {summary.today.consumed.protein} / {summary.goals.protein}g
+            </p>
+
+            <p>
+                Carbohydrates: {summary.today.consumed.carbohydrates} / {summary.goals.carbohydrates}g
+            </p>
+
+            <p>
+                Fat: {summary.today.consumed.fat} / {summary.goals.fat}g
+            </p>
+
+            <h2>Remaining</h2>
+
+            <p>
+                Calories: {summary.today.remaining.calories}
+            </p>
+
+            <p>
+                Protein: {summary.today.remaining.protein}g
+            </p>
+
+            <p>
+                Carbohydrates: {summary.today.remaining.carbohydrates}g
+            </p>
+
+            <p>
+                Fat: {summary.today.remaining.fat}g
+            </p>
+
+            <h2>This Week</h2>
+
+            {summary.week.map(day => (
+                <div key={day.date}>
+                    {day.date} : {day.calories} calories {day.protein}g {day.carbohydrates}g {day.fat}g 
+                </div>
+            ))}
         </>
     )
 }
