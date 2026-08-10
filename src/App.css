@@ -21,7 +21,6 @@ nav a:hover {
   color: var(--color-primary-dark);
 }
 
-
 /* Buttons Style */
 button {
   padding: 12px 18px;
@@ -156,10 +155,53 @@ form input:focus {
 /* Weekly Styles */
 .weekly-section {
   margin-top: 40px;
+  padding: 24px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
 }
 
 .weekly-section h2 {
-  text-align: center;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.weekly-bar-container {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: flex-end;
+  background-color: var(--color-primary-soft);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.weekly-chart {
+  display: flex;
+  gap: 20px;
+}
+
+.weekly-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.weekly-bar {
+  width: 100%;
+  background-color: var(--color-primary);
+  border-radius: 8px 8px 0 0;
+}
+
+.weekly-calories {
+  font-weight: 600;
+}
+
+.weekly-day-name {
+  color: var(--color-text-light);
+  font-weight: 600;
 }
 
 /* Responsive Styles */
@@ -181,5 +223,19 @@ form input:focus {
 
   nav {
     padding: 12px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .weekly-chart {
+    gap: 8px;
+  }
+
+  .weekly-bar-container {
+    height: 160px;
+  }
+
+  .weekly-calories {
+    font-size: 12px;
   }
 }

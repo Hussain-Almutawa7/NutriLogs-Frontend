@@ -55,8 +55,6 @@ function Dashboard({ user }) {
 
     }, []);
 
-    console.log(summary);
-
     if (isLoading) return <p>Loading Dashboard...</p>
 
     if (!summary) return <p>No Summary Details.</p>

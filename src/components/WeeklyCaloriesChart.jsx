@@ -21,7 +21,7 @@ function WeeklyCaloriesChart({ week, calorieGoal }) {
                 
                 return(
                     <div className="weekly-day" key={day.date}>
-                        <span className="weekly-calories">{Math.round(day.calories)}</span>
+                        <span className="weekly-calories">{Math.round(day.calories)} kcal</span>
 
                         <div className="weekly-bar-container">
                             <div className="weekly-bar" style={{height: `${percentage}%`}}></div>
