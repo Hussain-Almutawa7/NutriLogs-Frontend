@@ -17,8 +17,18 @@ function WeeklyCaloriesChart({ week, calorieGoal }) {
     return (
         <div className="weekly-chart">
             {week.map(day => {
+                const percentage = getBarPercentage(day.calories, calorieGoal);
+                
                 return(
-                    <div className="weekly-day" key={day.date}></div>
+                    <div className="weekly-day" key={day.date}>
+                        <span className="weekly-calories">{Math.round(day.calories)}</span>
+
+                        <div className="weekly-bar-container">
+                            <div className="weekly-bar" style={{height: `${percentage}%`}}></div>
+                        </div>
+
+                        <span className="weekly-day-name">{getDayName(day.date)}</span>
+                    </div>
                 );
             })}
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSummary } from "../services/foodLogService";
 import NutritionCard from "../components/NutritionCard";
+import WeeklyCaloriesChart from "../components/WeeklyCaloriesChart";
 
 function Dashboard({ user }) {
 
@@ -109,11 +110,7 @@ function Dashboard({ user }) {
 
             <section className="weekly-section">
                 <h2>This Week</h2>
-                {summary.week.map(day => (
-                    <div key={day.date}>
-                        {day.date} : {day.calories} calories {day.protein}g {day.carbohydrates}g {day.fat}g
-                    </div>
-                ))}
+                <WeeklyCaloriesChart week={summary.week} calorieGoal={summary.goals.calories} />
             </section>
 
         </main>
