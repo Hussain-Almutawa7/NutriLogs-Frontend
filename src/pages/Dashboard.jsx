@@ -2,16 +2,9 @@ import { useEffect, useState } from "react";
 import { getSummary } from "../services/foodLogService";
 import NutritionCard from "../components/NutritionCard";
 import WeeklyCaloriesChart from "../components/WeeklyCaloriesChart";
+import { formatDate } from "../utils/dateUtils";
 
 function Dashboard({ user }) {
-
-    function formatDate(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-
-        return `${year}-${month}-${day}`
-    }
 
     function getCurrentWeek() {
         const today = new Date();
@@ -34,7 +27,8 @@ function Dashboard({ user }) {
     }
 
     const [summary, setSummary] = useState({});
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchSummaryDetails = async () => {
@@ -45,7 +39,7 @@ function Dashboard({ user }) {
                 setSummary(summaryData);
 
             } catch (e) {
-                console.log("Error:", e.message);
+                setError(e.message);
             } finally {
                 setIsLoading(false);
             }
@@ -56,8 +50,9 @@ function Dashboard({ user }) {
     }, []);
 
     if (isLoading) return <p>Loading Dashboard...</p>
-
+    if (error) return <p>Error Occured: {error}</p>
     if (!summary) return <p>No Summary Details.</p>
+
 
 
     return (

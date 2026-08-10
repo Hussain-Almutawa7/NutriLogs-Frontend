@@ -10,17 +10,35 @@ const getSummary = async (startDate, endDate, today) => {
 
         const data = await res.json();
 
-        if (!res.ok) {
-            throw new Error(data.err)
-        }
+        if (!res.ok) throw new Error(data.err);
 
         return data;
-        
+
     } catch (e) {
-        throw new Error(e);
+        throw Error(e);
+    }
+}
+
+const getEntries = async (date) => {
+    try {
+        const res = await fetch(`${BASE_URL}/food-logs?date=${date}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(date.err);
+
+        return data;
+
+    } catch (e) {
+        throw Error(e);
     }
 }
 
 export {
     getSummary,
+    getEntries,
 }
