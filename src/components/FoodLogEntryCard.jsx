@@ -1,14 +1,41 @@
 function FoodLogEntryCard({ entry }) {
     return (
-        <div>
-            <p>{entry.time}</p>
-            <p>{entry.foodName}</p>
-            <p>{entry.brand ? entry.brand : ""}</p>
-            <p>{entry.consumedAmount} {entry.consumedUnit}</p>
-            <p>{entry.totalCalories} Kcal</p>
-            <p>{entry.totalProtein === null ? "N/A" : entry.totalProtein + "g"} Protein</p>
-            <p>{entry.totalCarbohydrates === null ? "N/A" : entry.totalCarbohydrates + "g"} Carbohydrates</p>
-            <p>{entry.totalFat === null ? "N/A" : entry.totalFat + "g"} Fat</p>
+        <div className="food-log-entry">
+
+            <div className="food-entry-header">
+                <div className="food-entry-info">
+                    <h3>{entry.foodName}</h3>
+                    {entry.brand && (
+                        <p className="food-entry-brand">{entry.brand}</p>
+                    )}
+                    <p className="food-entry-serving">{entry.consumedAmount} {entry.consumedUnit}</p>
+                </div>
+
+                <span className="food-entry-time">{entry.time}</span>
+            </div>
+
+            <div className="food-entry-calories">
+                <span>{Math.round(entry.totalCalories)}</span>
+                <small>kcal</small>
+            </div>
+
+            <div className="food-entry-macros">
+                <div className="food-entry-macro">
+                    <span>Protein</span>
+                    <strong>{entry.totalProtein === null ? "N/A" : `${Math.round(entry.totalProtein)}g`}</strong>
+                </div>
+
+                <div className="food-entry-macro">
+                    <span>Carbs</span>
+                    <strong>{entry.totalCarbohydrates === null ? "N/A" : `${Math.round(entry.totalCarbohydrates)}g`}</strong>
+                </div>
+
+                <div className="food-entry-macro">
+                    <span>Fat</span>
+                    <strong>{entry.totalFat === null ? "N/A" : `${Math.round(entry.totalFat)}g`}</strong>
+                </div>
+            </div>
+            
         </div>
     );
 }

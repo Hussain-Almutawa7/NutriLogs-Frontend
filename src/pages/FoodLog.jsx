@@ -37,24 +37,38 @@ function FoodLog() {
     }
 
     return (
-        <main>
-            <h1>Food Log</h1>
-            <input type="date" value={selectedDate} onChange={handleChange} />
+        <main className="food-log">
 
-            {isLoading ? (
-                <p>Loading Food Logs...</p>
-            ) : error ? (
-                <p>Error Occurred: {error}</p>
-            ) : entries.length === 0 ? (
-                <p>No food log entries.</p>
-            ) : (
-                entries.map(entry => (
-                    <div key={entry._id}>
-                        <FoodLogEntryCard entry={entry} />
+            <section className="food-log-header">
+                <div>
+                    <h1>Food Log</h1>
+                    <p>Track what you eat throughout the day.</p>
+                </div>
+
+                <div className="food-log-date">
+                    <label htmlFor="log-date">Date</label>
+                    <input id="log-date" type="date" value={selectedDate} onChange={handleChange} />
+                </div>
+            </section>
+
+            <section className="food-log-content">
+                {isLoading ? (
+                    <p className="food-log-message">Loading Food Logs...</p>
+                ) : error ? (
+                    <p className="food-log-message error-message">Error Occurred: {error}</p>
+                ) : entries.length === 0 ? (
+                    <div className="food-log-empty">
+                        <h3>No food logged.</h3>
+                        <p>You haven't logged any food for this day.</p>
                     </div>
-                ))
-            )}
-
+                ) : (
+                    <div className="food-log-list">
+                        {entries.map(entry => (
+                            <FoodLogEntryCard key={entry._id} entry={entry} />
+                        ))}
+                    </div>
+                )}
+            </section>
         </main>
     );
 }
