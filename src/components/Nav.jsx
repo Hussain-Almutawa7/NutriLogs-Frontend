@@ -13,12 +13,20 @@ const Nav = (props) => {
             <Link className="nav-brand" to="/">NutriLogs</Link>
             {props.user ? (
                 <ul>
-                    <li>Welcome, {props.user.username}!</li>
                     <li>
-                        <Link to="/" onClick={handleSignOut}>Sign Out</Link>
+                        <Link to={"/"}>Dashboard</Link>
                     </li>
                     <li>
-                        <Link to={"/"}>Home</Link>
+                        <Link to={"/food-log"}>Food Log</Link>
+                    </li>
+                    <li>
+                        <Link to={"/browse"}>Browse</Link>
+                    </li>
+                    <li>
+                        <Link to={"/library"}>Library</Link>
+                    </li>
+                    <li>
+                        <Link to="/" onClick={handleSignOut}>Sign Out</Link>
                     </li>
                 </ul>
             ) : (
