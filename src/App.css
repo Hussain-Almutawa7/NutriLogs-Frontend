@@ -96,7 +96,6 @@ form input:focus {
 }
 
 /*  Nutrition Component Style */
-
 .nutrition-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
