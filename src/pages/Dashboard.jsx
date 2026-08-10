@@ -70,6 +70,7 @@ function Dashboard({ user }) {
                 name="Calories"
                 consumed={summary.today.consumed.calories}
                 goal={summary.goals.calories}
+                remaining={summary.today.remaining.calories}
                 unit="kcal"
             />
 
@@ -77,6 +78,7 @@ function Dashboard({ user }) {
                 name="Protein"
                 consumed={summary.today.consumed.protein}
                 goal={summary.goals.protein}
+                remaining={summary.today.remaining.protein}
                 unit="g"
             />
 
@@ -84,6 +86,7 @@ function Dashboard({ user }) {
                 name="Carbohydrates"
                 consumed={summary.today.consumed.carbohydrates}
                 goal={summary.goals.carbohydrates}
+                remaining={summary.today.remaining.carbohydrates}
                 unit="g"
             />
 
@@ -91,27 +94,10 @@ function Dashboard({ user }) {
                 name="Fat"
                 consumed={summary.today.consumed.fat}
                 goal={summary.goals.fat}
+                remaining={summary.today.remaining.fat}
                 unit="g"
             />
-
-            <h2>Remaining</h2>
-
-            <p>
-                Calories: {summary.today.remaining.calories} kcal
-            </p>
-
-            <p>
-                Protein: {summary.today.remaining.protein}g
-            </p>
-
-            <p>
-                Carbohydrates: {summary.today.remaining.carbohydrates}g
-            </p>
-
-            <p>
-                Fat: {summary.today.remaining.fat}g
-            </p>
-
+            
             <h2>This Week</h2>
 
             {summary.week.map(day => (
