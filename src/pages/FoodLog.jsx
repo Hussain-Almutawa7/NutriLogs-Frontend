@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../utils/dateUtils";
 import { useNavigate } from "react-router";
 import FoodLogEntryCard from "../components/FoodLogEntryCard";
+import { getEntries } from "../services/foodLogService";
 
 function FoodLog() {
     function getCurrentDate() {

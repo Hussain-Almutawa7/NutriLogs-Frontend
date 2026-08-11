@@ -10,13 +10,13 @@ function Browse() {
     const [error, setError] = useState("");
     const [search, setSearch] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [searchedFoods, setSearchedFood] = useState([]);
+    const [searchedFoods, setSearchedFoods] = useState([]);
 
     useEffect(() => {
         const fetchAllFoods = async () => {
             try {
                 const libraryFoods = await getFoods();
-                setFoods(customFoods);
+                setFoods(libraryFoods);
             } catch (e) {
                 setError(e.message);
             } finally {
@@ -31,7 +31,7 @@ function Browse() {
         e.preventDefault();
         try {
             const searchResults = await searchApiFoods(search);
-            setSearchedFood(searchResults)
+            setSearchedFoods(searchResults)
         } catch (e) {
             setError(e.message)
         }
@@ -41,20 +41,70 @@ function Browse() {
         setSearch(e.target.value);
     }
 
+    console.log(foods)
+
     return (
-        <main>
-            <form onSubmit={handleSubmit}>
-                <input type="search" name="search" onChange={handleChange} value={search} placeholder="Search Food..." />
-                <button type="submit">Search Foods</button>
-            </form>
+        <main className="browse">
+            <section className="browse-header">
+                <h1>Browse Food</h1>
+                <p>Search for foods or choose from your library</p>
+            </section>
 
-            {foods.map(food => (
-                <FoodCard key={food._id} food={food} />
-            ))}
+            <section className="browse-search">
+                <form className="food-search-form" onSubmit={handleSubmit}>
+                    <input type="search" name="search" onChange={handleChange} value={search} placeholder="Search for chicken, rice, milk..." />
+                    <button type="submit">Search Foods</button>
+                </form>
+            </section>
 
-            {searchedFoods.map(apiFood => (
-                <ApiFoodCard key={apiFood.externalId} apiFood={apiFood} />
-            ))}
+            {error && (
+                <p className="browse-error">{error}</p>
+            )}
+
+            {searchedFoods.length > 0 && (
+                <section className="browse-section">
+
+                    <div className="browse-section-header">
+                        <div>
+                            <h2>Search Results</h2>
+                            <p>Foods found from USDA</p>
+                        </div>
+                    </div>
+
+                    <div className="food-grid">
+                        {searchedFoods.map(apiFood => (
+                            <ApiFoodCard
+                                key={apiFood.externalId}
+                                apiFood={apiFood}
+                            />
+                        ))}
+                    </div>
+
+                </section>
+            )}
+
+            <section className="browse-section">
+                <div className="browse-section-header">
+                    <div>
+                        <h2>Your Foods</h2>
+                        <p>Your custom and saved foods</p>
+                    </div>
+                </div>
+
+                {isLoading ? (
+                    <p>Loading foods...</p>
+                ) : foods.length === 0 ? (
+                    <div className="browse-empty">
+
+                    </div>
+                ) : (
+                    <div className="food-grid">
+                        {foods.map(food => (
+                            <FoodCard key={food._id} food={food} />
+                        ))}
+                    </div>
+                )}
+            </section>
         </main>
     );
 }
