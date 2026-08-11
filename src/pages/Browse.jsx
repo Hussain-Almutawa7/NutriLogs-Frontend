@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { getFoods, searchApiFoods } from "../services/foodService";
 import FoodCard from "../components/FoodCard";
 import ApiFoodCard from "../components/ApiFoodCard";
-import { Link } from "react-router";
 
 function Browse() {
 
@@ -40,8 +39,6 @@ function Browse() {
     function handleChange(e) {
         setSearch(e.target.value);
     }
-
-    console.log(foods)
 
     return (
         <main className="browse">

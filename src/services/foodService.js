@@ -18,7 +18,7 @@ const getFoods = async () => {
     }
 }
 
-const searchApiFoods = async (search) => {
+const searchApiFoods = async search => {
     try {
         const res = await fetch(`${BASE_URL}/nutrition/search?search=${encodeURIComponent(search)}`, {
             headers: {
@@ -36,7 +36,26 @@ const searchApiFoods = async (search) => {
     }
 }
 
+const showFood = async foodId => {
+    try {
+        const res = await fetch(`${BASE_URL}/foods/${foodId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.err);
+
+        return data;
+    } catch (e) {
+        throw Error(e.message)
+    }
+}
+
 export {
     getFoods,
     searchApiFoods,
+    showFood,
 }

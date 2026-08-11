@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard"
 import FoodLog from "./pages/FoodLog"
 import Browse from "./pages/Browse"
 import Library from "./pages/Library"
+import FoodDetails from "./pages/FoodDetails"
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/food-log" element={user ? <FoodLog /> : <Landing />} />
           <Route path="/browse" element={user ? <Browse /> : <Landing />} />
           <Route path="/library" element={user ? <Library /> : <Landing />} />
+          <Route path="/foods/:foodId" element={user ? <FoodDetails /> : <Landing />} />
         </Routes>
       </main>
     </>
