@@ -82,9 +82,31 @@ const importFood = async (externalId) => {
     }
 }
 
+const createFood = async (formData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/foods`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.err);
+
+        return data;
+    } catch (e) {
+        throw Error(e.message);
+    }
+}
+
 export {
     getFoods,
     showFood,
     favoriteFood,
     importFood,
+    createFood,
 }
