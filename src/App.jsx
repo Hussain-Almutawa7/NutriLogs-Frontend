@@ -14,6 +14,7 @@ import ApiFoodDetails from "./pages/ApiFoodDetails"
 import LogFoodPage from "./pages/LogFoodPage"
 import FoodLogEntryDetails from "./pages/FoodLogEntryDetails"
 import EditFoodLogEntryPage from "./pages/EditFoodLogEntryPage"
+import CreateFood from "./pages/CreateFood"
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -35,15 +36,22 @@ const App = () => {
           <Route path='/sign-up' element={<SignUpForm setUser={setUser} />} />
           <Route path='/sign-in' element={<SignInForm setUser={setUser} />} />
           <Route path="/" element={user ? <Dashboard user={user} /> : <Landing />} />
+
+          {/* FOOD LOGS ROUTES */}
           <Route path="/food-log" element={user ? <FoodLog /> : <Landing />} />
-          <Route path="/browse" element={user ? <Browse /> : <Landing />} />
-          <Route path="/library" element={user ? <Library /> : <Landing />} />
-          <Route path="/foods/:foodId" element={user ? <FoodDetails /> : <Landing />} />
-          <Route path="/nutrition/:externalId" element={user ? <ApiFoodDetails /> : <Landing />} />
           <Route path="/foods/:foodId/log" element={user ? <LogFoodPage type="saved" /> : <Landing />} />
           <Route path="/nutrition/:externalId/log" element={user ? <LogFoodPage type="api" /> : <Landing />} />
           <Route path="/food-log/:entryId" element={user ? <FoodLogEntryDetails /> : <Landing />} />
           <Route path="/food-log/:entryId/edit" element={user ? <EditFoodLogEntryPage /> : <Landing />} />
+
+          {/* FOOD ROUTES */}
+          <Route path="/foods/new" element={user ? <CreateFood /> : <Landing />} />
+          <Route path="/foods/:foodId" element={user ? <FoodDetails /> : <Landing />} />
+          <Route path="/nutrition/:externalId" element={user ? <ApiFoodDetails /> : <Landing />} />
+
+          {/* OTHER ROUTES */}
+          <Route path="/browse" element={user ? <Browse /> : <Landing />} />
+          <Route path="/library" element={user ? <Library /> : <Landing />} />
         </Routes>
       </main>
     </>
