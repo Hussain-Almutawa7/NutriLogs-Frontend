@@ -38,12 +38,12 @@ const getEntries = async (date) => {
     }
 }
 
-const createEntry = async (date, formData) => {
+const createEntry = async (formData) => {
     try {
-        const rest = await fetch(`${BASE_URL}/food-logs?date=${date}`, {
+        const res = await fetch(`${BASE_URL}/food-logs`, {
             method: "POST",
             headers: {
-                "Content-Type": "applications/json",
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             },
             body: JSON.stringify(formData)

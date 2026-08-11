@@ -11,6 +11,7 @@ import Browse from "./pages/Browse"
 import Library from "./pages/Library"
 import FoodDetails from "./pages/FoodDetails"
 import ApiFoodDetails from "./pages/ApiFoodDetails"
+import LogFoodPage from "./pages/LogFoodPage"
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -37,6 +38,8 @@ const App = () => {
           <Route path="/library" element={user ? <Library /> : <Landing />} />
           <Route path="/foods/:foodId" element={user ? <FoodDetails /> : <Landing />} />
           <Route path="/nutrition/:externalId" element={user ? <ApiFoodDetails /> : <Landing />} />
+          <Route path="/foods/:foodId/log" element={user ? <LogFoodPage type="saved" /> : <Landing />} />
+          <Route path="/nutrition/:externalId/log" element={user ? <LogFoodPage type="api" /> : <Landing />} />
         </Routes>
       </main>
     </>
