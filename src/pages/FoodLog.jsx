@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { formatDate } from "../utils/dateUtils";
-import { getEntries } from "../services/foodLogService";
+import { useNavigate } from "react-router";
 import FoodLogEntryCard from "../components/FoodLogEntryCard";
 
 function FoodLog() {
@@ -8,6 +8,8 @@ function FoodLog() {
         const today = new Date();
         return formatDate(today);
     }
+
+    const navigate = useNavigate();
 
     const [entries, setEntries] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +51,8 @@ function FoodLog() {
                     <label htmlFor="log-date">Date</label>
                     <input id="log-date" type="date" value={selectedDate} onChange={handleChange} />
                 </div>
+
+                <button onClick={() => navigate("/browse")}>Add</button>
             </section>
 
             <section className="food-log-content">

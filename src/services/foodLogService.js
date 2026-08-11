@@ -15,7 +15,7 @@ const getSummary = async (startDate, endDate, today) => {
         return data;
 
     } catch (e) {
-        throw Error(e);
+        throw Error(e.message);
     }
 }
 
@@ -34,11 +34,33 @@ const getEntries = async (date) => {
         return data;
 
     } catch (e) {
-        throw Error(e);
+        throw Error(e.message);
+    }
+}
+
+const createEntry = async (date, formData) => {
+    try {
+        const rest = await fetch(`${BASE_URL}/food-logs?date=${date}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "applications/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.err);
+
+        return data;
+
+    } catch (e) {
+        throw Error(e.message);
     }
 }
 
 export {
     getSummary,
     getEntries,
+    createEntry,
 }
