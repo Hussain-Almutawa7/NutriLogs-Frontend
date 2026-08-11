@@ -6,7 +6,7 @@ function ApiFoodDetails() {
 
     const { externalId } = useParams();
 
-    const [food, setFood] = useState({});
+    const [food, setFood] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 

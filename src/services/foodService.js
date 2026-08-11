@@ -36,6 +36,29 @@ const showFood = async foodId => {
     }
 }
 
+const favoriteFood = async (foodId, isFavorite) => {
+    try {
+        const res = await fetch(`${BASE_URL}/foods/${foodId}/favorite`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({
+                isFavorite,
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.err);
+
+        return data;
+    } catch (e) {
+        throw Error(e.message);
+    }
+}
+
 export {
     getFoods,
     showFood,
