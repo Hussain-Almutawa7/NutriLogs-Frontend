@@ -60,8 +60,27 @@ const createEntry = async (formData) => {
     }
 }
 
+const showEntry = async entryId => {
+    try {
+        const res = await fetch(`${BASE_URL}/food-logs/${entryId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.err);
+
+        return data;
+    } catch (e) {
+        throw Error(e.message);
+    }
+}
+
 export {
     getSummary,
     getEntries,
     createEntry,
+    showEntry,
 }
