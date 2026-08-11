@@ -46,7 +46,7 @@ const createEntry = async (formData) => {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formData),
         });
 
         const data = await res.json();
@@ -78,9 +78,31 @@ const showEntry = async entryId => {
     }
 }
 
+const editEntry = async (entryId, formData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/food-logs/${entryId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.err);
+
+        return data;
+    } catch (e) {
+        throw Error(e.message);
+    }
+}
+
 export {
     getSummary,
     getEntries,
     createEntry,
     showEntry,
+    editEntry,
 }
