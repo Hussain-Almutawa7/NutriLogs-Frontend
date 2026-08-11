@@ -87,7 +87,7 @@ function ApiFoodDetails() {
                 <div className="food-details-actions">
                     <button onClick={handleImport}>Favorite Food</button>
 
-                    <Link to={`/foods/${externalId}/log`}>
+                    <Link to={`/nutrition/${externalId}/log`}>
                         <button>Add to Log</button>
                     </Link>
                 </div>

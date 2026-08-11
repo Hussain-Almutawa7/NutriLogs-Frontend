@@ -22,7 +22,7 @@ function NutritionCard({ name, consumed, goal, remaining, unit }) {
                 <div className="progress-fill" style={{ width: `${percentage}%` }}></div>
             </div>
 
-            <p className="nutrition-remaining">Remaining: {remaining} {unit}</p>
+            <p className="nutrition-remaining">Remaining: {remaining.toFixed(0)} {unit}</p>
         </div>
     );
 }

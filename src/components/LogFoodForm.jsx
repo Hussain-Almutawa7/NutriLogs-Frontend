@@ -1,4 +1,4 @@
-import { createEntry } from "../services/foodLogService";
+import { createEntry, editEntry } from "../services/foodLogService";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { formatDate } from "../utils/dateUtils";
@@ -9,14 +9,25 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
     const navigate = useNavigate();
     const today = new Date();
 
-    const inititalState = {
-        consumedAmount: food.servingAmount,
-        consumedUnit: food.servingUnit,
-        date: formatDate(today),
-        time: formatTime(today)
+    let initialState;
+
+    if (mode === "edit") {
+        initialState = {
+            consumedAmount: entry.consumedAmount,
+            consumedUnit: entry.consumedUnit,
+            date: entry.date,
+            time: entry.time,
+        };
+    } else {
+        initialState = {
+            consumedAmount: food.servingAmount,
+            consumedUnit: food.servingUnit,
+            date: formatDate(today),
+            time: formatTime(today),
+        };
     }
 
-    const [formData, setFormData] = useState(inititalState);
+    const [formData, setFormData] = useState(initialState);
 
     function handleChange(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -26,18 +37,26 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
         e.preventDefault();
         const logData = { ...formData };
 
-        if (foodId)
-            logData.foodId = foodId;
-        else
-            logData.externalId = externalId;
+        if (mode === "edit") {
+            await editEntry(entryId, logData);
+            navigate(`/food-log/${entryId}`)
+        } else {
+            if (foodId)
+                logData.foodId = foodId;
+            else
+                logData.externalId = externalId;
 
-        await createEntry(logData);
-        navigate("/food-log");
+            await createEntry(logData);
+            navigate("/food-log");
+        }
+
     }
 
     return (
         <div>
-            <h1>Add {food.name}</h1>
+            <h1>
+                {mode === "edit" ? `Edit ${entry.foodName}` : `Add ${food.name}`}
+            </h1>
 
             <form onSubmit={handleSubmit}>
 
@@ -53,7 +72,9 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
                 <label htmlFor="time">Time</label>
                 <input type="time" id="time" name="time" value={formData.time} onChange={handleChange} />
 
-                <button type="submit">Log Food</button>
+                <button type="submit">
+                    {mode === "edit" ? "Save Changes" : "Log Food"}
+                </button>
 
             </form>
 
