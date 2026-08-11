@@ -62,4 +62,5 @@ const favoriteFood = async (foodId, isFavorite) => {
 export {
     getFoods,
     showFood,
+    favoriteFood,
 }

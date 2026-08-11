@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { showFood } from "../services/foodService";
+import { showFood, favoriteFood } from "../services/foodService";
 import { useEffect, useState } from "react";
 
 function FoodDetails() {
@@ -28,6 +28,15 @@ function FoodDetails() {
     if (isLoading) return <p>Loading food...</p>
     if (error) return <p>Error: {error}</p>
     if (!food) return <p>No Food Found</p>
+
+    const handleFavorite = async () => {
+        try {
+            const updatedFood = await favoriteFood(foodId, !food.isFavorite);
+            setFood(updatedFood);
+        } catch (e) {
+            setError(e);
+        }
+    }
 
     return (
         <main className="food-details">
@@ -72,6 +81,18 @@ function FoodDetails() {
                         <span>Fat</span>
                         <strong>{food.fat === null ? "N/A" : `${Math.round(food.fat)}g`}</strong>
                     </div>
+                </div>
+
+                <div className="food-details-actions">
+                    <button onClick={handleFavorite}>{food.isFavorite ? "Unfavorite Food" : "Favorite Food"}</button>
+
+                    <button>Add to Log</button>
+
+                    {food.source === "custom" && (
+                        <button>Edit Food</button>
+                    )}
+
+                    <button className="danger-button">Delete Food</button>
                 </div>
 
             </section>

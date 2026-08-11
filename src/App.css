@@ -624,6 +624,23 @@ form input:focus {
   font-size: 18px;
 }
 
+/* Action styles */
+.food-details-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.danger-button {
+  background-color: rgb(180, 0, 0);
+}
+
+.danger-button:hover {
+  background-color: darkred;
+}
+
 /* Responsive Styles */
 @media (max-width: 900px) {
   .nutrition-cards {
