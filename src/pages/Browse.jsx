@@ -70,12 +70,16 @@ function Browse() {
                     </div>
 
                     <div className="food-grid">
-                        {searchedFoods.map(apiFood => (
-                            <ApiFoodCard
-                                key={apiFood.externalId}
-                                apiFood={apiFood}
-                            />
-                        ))}
+                        {searchedFoods.map(apiFood => {
+                            const savedFood = foods.find(food => food.source === "api" && food.externalId === apiFood.externalId)
+                            return (
+                                <ApiFoodCard
+                                    key={apiFood.externalId}
+                                    apiFood={apiFood}
+                                    savedFood={savedFood}
+                                />
+                            )
+                        })}
                     </div>
 
                 </section>

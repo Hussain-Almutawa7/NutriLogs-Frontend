@@ -1,9 +1,10 @@
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { showFood, favoriteFood } from "../services/foodService";
 import { useEffect, useState } from "react";
 
 function FoodDetails() {
 
+    const navigate = useNavigate();
     const { foodId } = useParams();
 
     const [food, setFood] = useState(null);
@@ -32,6 +33,12 @@ function FoodDetails() {
     const handleFavorite = async () => {
         try {
             const updatedFood = await favoriteFood(foodId, !food.isFavorite);
+
+            if (updatedFood.source === "api" && updatedFood.isFavorite === false) {
+                navigate("/browse", { replace: true });
+                return;
+            }
+
             setFood(updatedFood);
         } catch (e) {
             setError(e);

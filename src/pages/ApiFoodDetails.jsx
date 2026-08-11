@@ -2,8 +2,11 @@ import { useParams } from "react-router";
 import { showApiFoodDetails } from "../services/nutritionService";
 import { importFood } from "../services/foodService";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 function ApiFoodDetails() {
+
+    const navigate = useNavigate();
 
     const { externalId } = useParams();
 
@@ -33,9 +36,9 @@ function ApiFoodDetails() {
     const handleImport = async () => {
         try {
             const importedFood = await importFood(externalId);
-            setFood(importedFood);
+            navigate(`/foods/${importedFood._id}`, { replace: true })
         } catch (e) {
-            setError(e);
+            setError(e.message);
         }
     }
 
@@ -81,11 +84,9 @@ function ApiFoodDetails() {
                 </div>
 
                 <div className="food-details-actions">
-                    <button onClick={handleImport}>{food.isFavorite ? "Unfavorite Food" : "Favorite Food"}</button>
+                    <button onClick={handleImport}>Favorite Food</button>
 
                     <button>Add to Log</button>
-
-                    <button className="danger-button">Delete Food</button>
                 </div>
 
             </section>

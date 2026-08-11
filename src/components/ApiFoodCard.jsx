@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 
-function ApiFoodCard({ apiFood }) {
+function ApiFoodCard({ apiFood, savedFood }) {
+    const detailsPath = savedFood ? `/foods/${savedFood._id}` : `/nutrition/${apiFood.externalId}`;
+
     return (
-        <Link to={`/nutrition/${apiFood.externalId}`}>
+        <Link to={detailsPath}>
             <div className="food-card">
                 <div className="food-card-header">
                     <div>
@@ -11,7 +13,12 @@ function ApiFoodCard({ apiFood }) {
                             <p className="food-card-brand">{apiFood.brand}</p>
                         )}
                     </div>
-                    <span className="food-source-badge api">USDA</span>
+
+                    {savedFood ? (
+                        <span className="food-source-badge">Saved</span>
+                    ) : (
+                        <span className="food-source-badge api"> USDA</span>
+                    )}
                 </div>
 
                 <div className="food-card-calories">
