@@ -99,10 +99,29 @@ const editEntry = async (entryId, formData) => {
     }
 }
 
+const deleteEntry = async entryId => {
+    try {
+        const res = await fetch(`${BASE_URL}/food-logs/${entryId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+
+        if (!res.ok) {
+            const data = await res.json();
+            throw new Error(data.err);
+        }
+    } catch (e) {
+        throw Error(e.message);
+    }
+}
+
 export {
     getSummary,
     getEntries,
     createEntry,
     showEntry,
     editEntry,
+    deleteEntry,
 }

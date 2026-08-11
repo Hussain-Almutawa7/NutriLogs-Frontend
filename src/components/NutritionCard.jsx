@@ -16,7 +16,7 @@ function NutritionCard({ name, consumed, goal, remaining, unit }) {
                 <span>{percentage.toFixed(0)}%</span>
             </div>
 
-            <p className="nutrition-value">{consumed} / {goal} {unit}</p>
+            <p className="nutrition-value">{consumed.toFixed(0)} / {goal} {unit}</p>
 
             <div className="progress-bar">
                 <div className="progress-fill" style={{ width: `${percentage}%` }}></div>
