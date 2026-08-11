@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router";
 import { showFood, favoriteFood } from "../services/foodService";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 function FoodDetails() {
 
@@ -93,7 +94,9 @@ function FoodDetails() {
                 <div className="food-details-actions">
                     <button onClick={handleFavorite}>{food.isFavorite ? "Unfavorite Food" : "Favorite Food"}</button>
 
-                    <button>Add to Log</button>
+                    <Link to={`/foods/${foodId}/log`}>
+                        <button>Add to Log</button>
+                    </Link>
 
                     {food.source === "custom" && (
                         <button>Edit Food</button>

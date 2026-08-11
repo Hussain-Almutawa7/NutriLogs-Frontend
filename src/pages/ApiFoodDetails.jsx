@@ -3,6 +3,7 @@ import { showApiFoodDetails } from "../services/nutritionService";
 import { importFood } from "../services/foodService";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 function ApiFoodDetails() {
 
@@ -86,7 +87,9 @@ function ApiFoodDetails() {
                 <div className="food-details-actions">
                     <button onClick={handleImport}>Favorite Food</button>
 
-                    <button>Add to Log</button>
+                    <Link to={`/foods/${externalId}/log`}>
+                        <button>Add to Log</button>
+                    </Link>
                 </div>
 
             </section>
