@@ -647,6 +647,131 @@ form input:focus {
   background-color: darkred;
 }
 
+/* Food Log Entry Details Style */
+.entry-details {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.entry-details-card {
+  padding: 32px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+.entry-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.entry-details-header h1 {
+  margin-bottom: 8px;
+}
+
+.entry-details-brand {
+  margin-bottom: 0;
+  color: var(--color-text-light);
+}
+
+.entry-details-consumed {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 28px;
+  padding: 20px;
+  background-color: var(--color-primary-soft);
+  border-radius: 12px;
+}
+
+.entry-details-consumed div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.entry-details-consumed span {
+  color: var(--color-text-light);
+  font-size: 13px;
+}
+
+.entry-details-consumed strong {
+  font-size: 16px;
+}
+
+.entry-details-calories {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 28px;
+}
+
+.entry-details-calories strong {
+  font-size: 42px;
+}
+
+.entry-details-calories span {
+  color: var(--color-text-light);
+}
+
+.entry-details-macros {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.entry-details-macros div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.entry-details-macros span {
+  color: var(--color-text-light);
+  font-size: 13px;
+}
+
+.entry-details-macros strong {
+  font-size: 18px;
+}
+
+.entry-details-base {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.entry-details-base span {
+  color: var(--color-text-light);
+}
+
+.entry-details-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.entry-details-actions button {
+  flex: 1;
+}
+
+.danger-button {
+  background-color: var(--color-error);
+}
+
+.danger-button:hover {
+  background-color: #b91c1c;
+}
+
 /* Responsive Styles */
 @media (max-width: 900px) {
   .nutrition-cards {
@@ -708,7 +833,6 @@ form input:focus {
   }
 }
 
-
 @media (max-width: 900px) {
 
   .food-grid {
@@ -749,4 +873,28 @@ form input:focus {
     font-size: 34px;
   }
 
+}
+
+@media (max-width: 600px) {
+
+  .entry-details {
+    width: 92%;
+    padding: 24px 0;
+  }
+
+  .entry-details-card {
+    padding: 22px;
+  }
+
+  .entry-details-consumed {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-details-calories strong {
+    font-size: 34px;
+  }
+
+  .entry-details-actions {
+    flex-direction: column;
+  }
 }
