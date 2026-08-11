@@ -549,6 +549,81 @@ form input:focus {
   border-radius: 8px;
 }
 
+/* Food Details Style*/
+.food-details {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.food-details-card {
+  padding: 32px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+.food-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.food-details-header h1 {
+  margin-bottom: 8px;
+}
+
+.food-details-brand {
+  margin-bottom: 0;
+  color: var(--color-text-light);
+}
+
+.food-details-serving {
+  margin-top: 28px;
+  color: var(--color-text-light);
+  font-size: 14px;
+}
+
+.food-details-calories {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.food-details-calories strong {
+  font-size: 42px;
+}
+
+.food-details-calories span {
+  color: var(--color-text-light);
+}
+
+.food-details-macros {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.food-details-macros div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.food-details-macros span {
+  color: var(--color-text-light);
+  font-size: 13px;
+}
+
+.food-details-macros strong {
+  font-size: 18px;
+}
+
 /* Responsive Styles */
 @media (max-width: 900px) {
   .nutrition-cards {
@@ -632,6 +707,23 @@ form input:focus {
 
   .food-grid {
     grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .food-details {
+    width: 92%;
+    padding: 24px 0;
+  }
+
+  .food-details-card {
+    padding: 22px;
+  }
+
+  .food-details-calories strong {
+    font-size: 34px;
   }
 
 }

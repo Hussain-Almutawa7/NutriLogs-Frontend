@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getFoods } from "../services/foodService";
-import { searchApiFoods } from "../services/foodService";
+import { searchApiFoods } from "../services/nutritionService";
 import FoodCard from "../components/FoodCard";
 import ApiFoodCard from "../components/ApiFoodCard";
 
