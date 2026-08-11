@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
-import { showFood } from "../services/foodService";
+import { showApiFoodDetails } from "../services/nutritionService";
 import { useEffect, useState } from "react";
 
-function FoodDetails() {
+function ApiFoodDetails() {
 
-    const { foodId } = useParams();
+    const { externalId } = useParams();
 
     const [food, setFood] = useState({});
     const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ function FoodDetails() {
     useEffect(() => {
         const fetchFoodDetails = async () => {
             try {
-                const foodData = await showFood(foodId);
+                const foodData = await showApiFoodDetails(externalId);
                 setFood(foodData);
             } catch (e) {
                 setError(e.message);
@@ -23,7 +23,7 @@ function FoodDetails() {
         }
 
         fetchFoodDetails();
-    }, [foodId]);
+    }, [externalId]);
 
     if (isLoading) return <p>Loading food...</p>
     if (error) return <p>Error: {error}</p>
@@ -31,9 +31,10 @@ function FoodDetails() {
 
     return (
         <div>
+            <h1>Api</h1>
             <h1>{food.name}</h1>
         </div>
     );
 }
 
-export default FoodDetails;
+export default ApiFoodDetails;

@@ -10,6 +10,7 @@ import FoodLog from "./pages/FoodLog"
 import Browse from "./pages/Browse"
 import Library from "./pages/Library"
 import FoodDetails from "./pages/FoodDetails"
+import ApiFoodDetails from "./pages/ApiFoodDetails"
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/browse" element={user ? <Browse /> : <Landing />} />
           <Route path="/library" element={user ? <Library /> : <Landing />} />
           <Route path="/foods/:foodId" element={user ? <FoodDetails /> : <Landing />} />
+          <Route path="/nutrition/:externalId" element={user ? <ApiFoodDetails /> : <Landing />} />
         </Routes>
       </main>
     </>
