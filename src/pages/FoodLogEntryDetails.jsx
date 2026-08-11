@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { showEntry } from "../services/foodLogService";
+import { showEntry, deleteEntry } from "../services/foodLogService";
 import { Link } from "react-router";
 
 function FoodLogEntryDetails() {
@@ -26,6 +26,16 @@ function FoodLogEntryDetails() {
 
         fetchEntryDetails();
     }, [entryId]);
+
+
+    const handleDelete = async () => {
+        try {
+            await deleteEntry(entryId);
+            navigate("/food-log");
+        } catch (e) {
+            setError(e.message);
+        }
+    }
 
     if (isLoading) return <p>Loading entry...</p>
     if (error) return <p>Error: {error}</p>
@@ -103,7 +113,10 @@ function FoodLogEntryDetails() {
                     <Link to={`/food-log/${entryId}/edit`}>
                         <button> Edit Entry</button>
                     </Link>
-                    <button className="danger-button">Delete Entry</button>
+
+                    <button className="danger-button" onClick={handleDelete}>
+                        Delete Entry
+                    </button>
                 </div>
             </section>
 
