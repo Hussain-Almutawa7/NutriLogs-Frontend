@@ -13,6 +13,7 @@ import FoodDetails from "./pages/FoodDetails"
 import ApiFoodDetails from "./pages/ApiFoodDetails"
 import LogFoodPage from "./pages/LogFoodPage"
 import FoodLogEntryDetails from "./pages/FoodLogEntryDetails"
+import EditFoodLogEntryPage from "./pages/EditFoodLogEntryPage"
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/foods/:foodId/log" element={user ? <LogFoodPage type="saved" /> : <Landing />} />
           <Route path="/nutrition/:externalId/log" element={user ? <LogFoodPage type="api" /> : <Landing />} />
           <Route path="/food-log/:entryId" element={user ? <FoodLogEntryDetails /> : <Landing />} />
+          <Route path="/food-log/:entryId/edit" element={user ? <EditFoodLogEntryPage /> : <Landing />} />
         </Routes>
       </main>
     </>

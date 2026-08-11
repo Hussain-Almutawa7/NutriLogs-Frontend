@@ -1,9 +1,12 @@
 import { useParams, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { showEntry } from "../services/foodLogService";
+import { Link } from "react-router";
 
 function FoodLogEntryDetails() {
+
     const { entryId } = useParams();
+    const navigate = useNavigate();
 
     const [entry, setEntry] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -63,12 +66,10 @@ function FoodLogEntryDetails() {
                     </div>
                 </div>
 
-
                 <div className="entry-details-calories">
                     <strong>{Math.round(entry.totalCalories)}</strong>
                     <span>kcal consumed</span>
                 </div>
-
 
                 <div className="entry-details-macros">
                     <div>
@@ -93,15 +94,15 @@ function FoodLogEntryDetails() {
                     </div>
                 </div>
 
-
                 <div className="entry-details-base">
                     <span>Nutrition based on</span>
                     <strong>{entry.baseAmount} {entry.baseUnit}</strong>
                 </div>
 
-
                 <div className="entry-details-actions">
-                    <button> Edit Entry</button>
+                    <Link to={`/food-log/${entryId}/edit`}>
+                        <button> Edit Entry</button>
+                    </Link>
                     <button className="danger-button">Delete Entry</button>
                 </div>
             </section>

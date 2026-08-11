@@ -43,9 +43,9 @@ function LogFoodPage({ type }) {
     return (
         <main>
             {type === "saved" ? (
-                <LogFoodForm food={food} foodId={foodId} />
+                <LogFoodForm food={food} foodId={foodId} mode="create" />
             ) : (
-                <LogFoodForm food={food} externalId={externalId} />
+                <LogFoodForm food={food} externalId={externalId} mode="create" />
             )}
         </main>
     );
