@@ -16,15 +16,22 @@ function LogFoodForm({ food, foodId, externalId }) {
         time: formatTime(today)
     }
 
-    const [formData, setFormDate] = useState(inititalState);
+    const [formData, setFormData] = useState(inititalState);
 
     function handleChange(e) {
-        setFormDate({ ...formData, [e.target.name]: e.target.value })
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = async e => {
         e.preventDefault();
-        await createEntry(formData);
+        const logData = { ...formData };
+
+        if (foodId)
+            logData.foodId = foodId;
+        else
+            logData.externalId = externalId;
+
+        await createEntry(logData);
         navigate("/food-log");
     }
 
@@ -33,17 +40,20 @@ function LogFoodForm({ food, foodId, externalId }) {
             <h1>Add {food.name}</h1>
 
             <form onSubmit={handleSubmit}>
+
                 <label htmlFor="consumedAmount">Consumed Amount</label>
                 <input type="number" name="consumedAmount" id="consumedAmount" onChange={handleChange} value={formData.consumedAmount} />
 
                 <label htmlFor="consumedUnit">Consumed Unit</label>
-                <input type="text" id="consumedUnit" name="consumedUnit" value={formData.consumedUnit} />
+                <input type="text" id="consumedUnit" name="consumedUnit" value={formData.consumedUnit} readOnly />
 
                 <label htmlFor="date">Date</label>
                 <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} />
 
                 <label htmlFor="time">Time</label>
                 <input type="time" id="time" name="time" value={formData.time} onChange={handleChange} />
+
+                <button type="submit">Log Food</button>
 
             </form>
 
