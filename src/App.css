@@ -625,16 +625,22 @@ form input:focus {
 }
 
 /* Action styles */
+.food-card-actions,
 .food-details-actions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 28px;
-  padding-top: 24px;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
   border-top: 1px solid var(--color-border);
 }
 
+.food-card-actions button,
+.food-details-actions button {
+  flex: 1;
+}
+
 .danger-button {
-  background-color: rgb(180, 0, 0);
+  background-color: var(--color-error);
 }
 
 .danger-button:hover {

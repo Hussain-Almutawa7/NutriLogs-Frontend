@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { showApiFoodDetails } from "../services/nutritionService";
+import { importFood } from "../services/foodService";
 import { useEffect, useState } from "react";
 
 function ApiFoodDetails() {
@@ -28,6 +29,15 @@ function ApiFoodDetails() {
     if (isLoading) return <p>Loading food...</p>
     if (error) return <p>Error: {error}</p>
     if (!food) return <p>No Food Found</p>
+
+    const handleImport = async () => {
+        try {
+            const importedFood = await importFood(externalId);
+            setFood(importedFood);
+        } catch (e) {
+            setError(e);
+        }
+    }
 
     return (
         <main className="food-details">
@@ -68,6 +78,14 @@ function ApiFoodDetails() {
                         <span>Fat</span>
                         <strong>{food.fat === null ? "N/A" : `${Math.round(food.fat)}g`}</strong>
                     </div>
+                </div>
+
+                <div className="food-details-actions">
+                    <button onClick={handleImport}>{food.isFavorite ? "Unfavorite Food" : "Favorite Food"}</button>
+
+                    <button>Add to Log</button>
+
+                    <button className="danger-button">Delete Food</button>
                 </div>
 
             </section>
