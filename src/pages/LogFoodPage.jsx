@@ -7,45 +7,42 @@ import { showApiFoodDetails } from "../services/nutritionService";
 function LogFoodPage({ type }) {
 
     const { foodId, externalId } = useParams();
+
     const [food, setFood] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
-    if (type === "saved") {
-        useEffect(() => {
-            const fetchFoodDetails = async () => {
-                try {
-                    const foodData = await showFood(foodId);
-                    setFood(foodData);
-                } catch (e) {
-                    setError(e.message);
-                } finally {
-                    setIsLoading(false);
-                }
-            }
+    useEffect(() => {
 
-            fetchFoodDetails();
-        }, [foodId]);
-    } else {
-        useEffect(() => {
-            const fetchFoodDetails = async () => {
-                try {
-                    const foodData = await showApiFoodDetails(externalId);
-                    setFood(foodData);
-                } catch (e) {
-                    setError(e.message);
-                } finally {
-                    setIsLoading(false);
+        const fetchFoodDetails = async () => {
+            try {
+                let foodData;
+
+                if (type === "saved") {
+                    foodData = await showFood(foodId);
+                } else {
+                    foodData = await showApiFoodDetails(externalId);
                 }
+
+                setFood(foodData);
+            } catch (e) {
+                setError(e.message);
+            } finally {
+                setIsLoading(false);
             }
-            fetchFoodDetails();
-        }, []);
-    }
+        };
+
+        fetchFoodDetails();
+
+    }, [type, foodId, externalId]);
+
+    if (isLoading) return <p>Loading food...</p>;
+    if (error) return <p>Error: {error}</p>;
+    if (!food) return <p>Food not found.</p>;
 
     return (
         <main>
-            <h1>This is log food page</h1>
-            {foodId ? (
+            {type === "saved" ? (
                 <LogFoodForm food={food} foodId={foodId} />
             ) : (
                 <LogFoodForm food={food} externalId={externalId} />

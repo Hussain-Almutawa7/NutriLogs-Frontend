@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { formatDate } from "../utils/dateUtils";
 import { formatTime } from "../utils/timeUtils";
 
-function LogFoodForm({ food }) {
+function LogFoodForm({ food, foodId, externalId }) {
 
     const navigate = useNavigate();
     const today = new Date();
