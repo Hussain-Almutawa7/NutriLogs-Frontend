@@ -1,7 +1,16 @@
+import FoodForm from "../components/FoodForm";
+
 function CreateFood() {
-    return(
-        <main>
-            <h1>Create Food</h1>
+    return (
+        <main className="create-food">
+            <section className="create-food-header">
+                <h1>Create Custom Food</h1>
+                <p>Add your own food and nutrition information.</p>
+            </section>
+
+            <section className="create-food-form">
+                <FoodForm />
+            </section>
         </main>
     );
 }

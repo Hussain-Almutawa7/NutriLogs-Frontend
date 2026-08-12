@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { createFood } from "../services/foodService";
+import { useNavigate } from "react-router";
 
 function FoodForm() {
+
+    const navigate = useNavigate();
 
     const initialState = {
         name: "",
         brand: "",
         servingAmount: "",
         servingUnit: "",
-        calories: 0,
-        protein: null,
-        carbohydrates: null,
-        fat: null,
+        calories: "",
+        protein: "",
+        carbohydrates: "",
+        fat: "",
     }
 
     const [formData, setFormData] = useState(initialState)
@@ -21,18 +25,52 @@ function FoodForm() {
 
     const handleSubmit = async e => {
         e.preventDefault();
+
+        const foodData = {
+            ...formData,
+            servingAmount: Number(formData.servingAmount),
+            calories: Number(formData.calories),
+            protein: formData.protein === "" ? null : Number(formData.protein),
+            carbohydrates: formData.carbohydrates === "" ? null : Number(formData.carbohydrates),
+            fat: formData.fat === "" ? null : Number(formData.fat),
+        };
+
+        await createFood(foodData);
+        navigate("/library");
     }
 
 
     return (
-        <main>
-            <h1>All Food Info</h1>
-
+        <div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
-                <input type="text" name="name" id="name" onChange={handleChange} value={formData.name} />
+                <input type="text" name="name" id="name" onChange={handleChange} value={formData.name} required />
+
+                <label htmlFor="brand">Brand</label>
+                <input type="text" name="brand" id="brand" onChange={handleChange} value={formData.brand} />
+
+                <label htmlFor="servingAmount">Serving Amount</label>
+                <input type="number" name="servingAmount" id="servingAmount" onChange={handleChange} value={formData.servingAmount} required min={0.01} step={0.01} />
+
+                <label htmlFor="servingUnit">Serving Unit</label>
+                <input type="text" name="servingUnit" id="servingUnit" onChange={handleChange} value={formData.servingUnit} required />
+
+                <label htmlFor="calories">Calories</label>
+                <input type="number" name="calories" id="calories" onChange={handleChange} value={formData.calories} required min={0} step={0.01} />
+
+                <label htmlFor="protein">Protein</label>
+                <input type="number" name="protein" id="protein" onChange={handleChange} value={formData.protein} min={0} step={0.01} />
+
+                <label htmlFor="carbohydrates">Carbohydrates</label>
+                <input type="number" name="carbohydrates" id="carbohydrates" onChange={handleChange} value={formData.carbohydrates} min={0} step={0.01} />
+
+                <label htmlFor="fat">Fat</label>
+                <input type="number" name="fat" id="fat" onChange={handleChange} value={formData.fat} min={0} step={0.01} />
+
+                <button type="submit">Add Food</button>
+
             </form>
-        </main>
+        </div>
     );
 }
 
