@@ -18,7 +18,7 @@ function UserGoals() {
     useEffect(() => {
         const fetchSummarygoals = async () => {
             try {
-                const summaryData = await getSummary(formatedDate);
+                const summaryData = await getSummary(formatedDate, formatedDate, formatedDate);
                 const goals = summaryData.goals;
 
                 setFormData({

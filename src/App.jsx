@@ -36,6 +36,7 @@ const App = () => {
       <Nav user={user} setUser={setUser} />
       <div className="app-main">
         <Routes>
+          {/* AUTH ROUTES */}
           <Route path='/sign-up' element={<SignUpForm setUser={setUser} />} />
           <Route path='/sign-in' element={<SignInForm setUser={setUser} />} />
           <Route path="/" element={user ? <Dashboard user={user} /> : <Landing />} />
