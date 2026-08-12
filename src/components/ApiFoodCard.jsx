@@ -30,7 +30,7 @@ function ApiFoodCard({ apiFood, savedFood }) {
 
                 <div className="food-card-macros">
                     <div>
-                        <span>Protien</span>
+                        <span>Protein</span>
                         <strong>{apiFood.protein === null ? "N/A" : `${Math.round(apiFood.protein)}g`}</strong>
                     </div>
 

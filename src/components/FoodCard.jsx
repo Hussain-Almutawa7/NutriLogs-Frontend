@@ -30,11 +30,11 @@ function FoodCard({ food, onFoodUpdated }) {
                     <span>kcal</span>
                 </div>
 
-                <p className="food-card-serving">Per {food.servingAmoung} {food.servingUnit}</p>
+                <p className="food-card-serving">Per {food.servingAmount} {food.servingUnit}</p>
 
                 <div className="food-card-macros">
                     <div>
-                        <span>Protien</span>
+                        <span>Protein</span>
                         <strong>{food.protein === null ? "N/A" : `${Math.round(food.protein)}g`}</strong>
                     </div>
 

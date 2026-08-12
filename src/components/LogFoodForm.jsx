@@ -37,17 +37,21 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
         e.preventDefault();
         const logData = { ...formData };
 
-        if (mode === "edit") {
-            await editEntry(entryId, logData);
-            navigate(`/food-log/${entryId}`)
-        } else {
-            if (foodId)
-                logData.foodId = foodId;
-            else
-                logData.externalId = externalId;
+        try {
+            if (mode === "edit") {
+                await editEntry(entryId, logData);
+                navigate(`/food-log/${entryId}`)
+            } else {
+                if (foodId)
+                    logData.foodId = foodId;
+                else
+                    logData.externalId = externalId;
 
-            await createEntry(logData);
-            navigate("/food-log");
+                await createEntry(logData);
+                navigate("/food-log");
+            }
+        } catch (e) {
+            console.log(e.mesage);
         }
 
     }

@@ -43,21 +43,25 @@ function FoodForm({ mode, foodId, food }) {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        const foodData = {
-            ...formData,
-            servingAmount: Number(formData.servingAmount),
-            calories: Number(formData.calories),
-            protein: formData.protein === "" ? null : Number(formData.protein),
-            carbohydrates: formData.carbohydrates === "" ? null : Number(formData.carbohydrates),
-            fat: formData.fat === "" ? null : Number(formData.fat),
-        };
+        try {
+            const foodData = {
+                ...formData,
+                servingAmount: Number(formData.servingAmount),
+                calories: Number(formData.calories),
+                protein: formData.protein === "" ? null : Number(formData.protein),
+                carbohydrates: formData.carbohydrates === "" ? null : Number(formData.carbohydrates),
+                fat: formData.fat === "" ? null : Number(formData.fat),
+            };
 
-        if (mode === "edit") {
-            await editFood(foodId, foodData);
-            navigate(`/foods/${foodId}`)
-        } else {
-            await createFood(foodData);
-            navigate("/library");
+            if (mode === "edit") {
+                await editFood(foodId, foodData);
+                navigate(`/foods/${foodId}`)
+            } else {
+                await createFood(foodData);
+                navigate("/library");
+            }
+        } catch (e) {
+            console.log(e.message);
         }
     }
 
