@@ -8,7 +8,7 @@ function NotFound() {
             <p>The page you're looking for doesn't exist.</p>
 
             <Link to="/">
-                <button>Back to Dashboard</button>
+                <button>Back Home</button>
             </Link>
         </main>
     );
