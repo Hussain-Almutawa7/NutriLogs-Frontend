@@ -25,6 +25,10 @@ function EditFood() {
         fetchFoodDetails();
     }, [foodId]);
 
+    if (isLoading) return <p>Loading food...</p>;
+    if (error) return <p>{error}</p>;
+    if (!food) return <p>Food not found.</p>;
+
     return (
         <main className="create-food">
             <section className="create-food-header">

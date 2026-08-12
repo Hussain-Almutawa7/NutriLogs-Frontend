@@ -6,16 +6,33 @@ function FoodForm({ mode, foodId, food }) {
 
     const navigate = useNavigate();
 
-    const initialState = {
-        name: "",
-        brand: "",
-        servingAmount: "",
-        servingUnit: "",
-        calories: "",
-        protein: "",
-        carbohydrates: "",
-        fat: "",
+    let initialState;
+
+    if (mode === "edit") {
+        initialState = {
+            name: food.name,
+            brand: food.brand ?? "",
+            servingAmount: food.servingAmount,
+            servingUnit: food.servingUnit,
+            calories: food.calories,
+            protein: food.protein ?? "",
+            carbohydrates: food.carbohydrates ?? "",
+            fat: food.fat ?? "",
+        }
+    } else {
+        initialState = {
+            name: "",
+            brand: "",
+            servingAmount: "",
+            servingUnit: "",
+            calories: "",
+            protein: "",
+            carbohydrates: "",
+            fat: "",
+        }
     }
+
+
 
     const [formData, setFormData] = useState(initialState)
 
@@ -35,8 +52,13 @@ function FoodForm({ mode, foodId, food }) {
             fat: formData.fat === "" ? null : Number(formData.fat),
         };
 
-        await createFood(foodData);
-        navigate("/library");
+        if (mode === "edit") {
+            await editFood(foodId, foodData);
+            navigate(`/foods/${foodId}`)
+        } else {
+            await createFood(foodData);
+            navigate("/library");
+        }
     }
 
 
@@ -67,7 +89,9 @@ function FoodForm({ mode, foodId, food }) {
                 <label htmlFor="fat">Fat</label>
                 <input type="number" name="fat" id="fat" onChange={handleChange} value={formData.fat} min={0} step={0.01} />
 
-                <button type="submit">Add Food</button>
+                <button type="submit">
+                    {mode === "edit" ? "Save Changes" : "Add Food"}
+                </button>
 
             </form>
         </div>
