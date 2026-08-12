@@ -65,7 +65,7 @@ function FoodForm({ mode, foodId, food }) {
 
 
     return (
-        <div>
+        <div className="form-card">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" onChange={handleChange} value={formData.name} required />

@@ -42,7 +42,7 @@ function LogFoodPage({ type }) {
     if (!food) return <p>Food not found.</p>;
 
     return (
-        <main>
+        <main className="form-page">
             {type === "saved" ? (
                 <LogFoodForm food={food} foodId={foodId} mode="create" />
             ) : (

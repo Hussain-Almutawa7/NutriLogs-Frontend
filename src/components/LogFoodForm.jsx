@@ -57,7 +57,7 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
     }
 
     return (
-        <div>
+        <div className="form-card">
             <h1>
                 {mode === "edit" ? `Edit ${entry.foodName}` : `Add ${food.name}`}
             </h1>

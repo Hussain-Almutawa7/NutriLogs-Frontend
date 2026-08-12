@@ -31,7 +31,7 @@ function EditFoodLogEntryPage() {
     if (!entry) return <p>No entry Found</p>
 
     return (
-        <main>
+        <main className="form-page">
             <LogFoodForm entry={entry} entryId={entryId} mode={"edit"} />
         </main>
     );
