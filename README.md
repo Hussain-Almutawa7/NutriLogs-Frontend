@@ -1,5 +1,3 @@
-# React + Vite
-
 # NutriLogs
 
 *A full-stack nutrition tracking application that allows users to log food, monitor daily nutrition, set nutrition goals, search USDA foods, create custom foods, and manage a personal food library.*
