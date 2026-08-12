@@ -3,6 +3,7 @@ import { getSummary } from "../services/foodLogService";
 import { formatDate } from "../utils/dateUtils";
 import { updateGoals } from "../services/userService";
 import { useNavigate } from "react-router";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function UserGoals() {
 
@@ -67,7 +68,7 @@ function UserGoals() {
         }
     }
 
-    if (isLoading) return <p>Loading user goals...</p>
+    if (isLoading) return <LoadingSpinner message="Loading user goals..." />;
     if (error) return <p>Error Occured: {error}</p>
 
     return (

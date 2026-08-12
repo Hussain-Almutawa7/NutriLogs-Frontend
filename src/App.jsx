@@ -34,7 +34,7 @@ const App = () => {
   return (
     <>
       <Nav user={user} setUser={setUser} />
-      <main className="app-main">
+      <div className="app-main">
         <Routes>
           <Route path='/sign-up' element={<SignUpForm setUser={setUser} />} />
           <Route path='/sign-in' element={<SignInForm setUser={setUser} />} />
@@ -59,7 +59,7 @@ const App = () => {
           <Route path="/goals" element={user ? <UserGoals /> : <Landing />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </main>
+      </div>
     </>
   )
 }

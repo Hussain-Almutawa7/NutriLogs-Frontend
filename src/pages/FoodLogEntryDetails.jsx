@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { showEntry, deleteEntry } from "../services/foodLogService";
 import { Link } from "react-router";
 import ConfirmModal from "../components/ConfirmModal";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function FoodLogEntryDetails() {
 
@@ -39,7 +40,7 @@ function FoodLogEntryDetails() {
         }
     }
 
-    if (isLoading) return <p>Loading entry...</p>
+    if (isLoading) return <LoadingSpinner message="Loading entry..." />;
     if (error) return <p>Error: {error}</p>
     if (!entry) return <p>No entry Found</p>
 

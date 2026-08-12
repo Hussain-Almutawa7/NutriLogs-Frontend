@@ -32,8 +32,6 @@ function FoodForm({ mode, foodId, food }) {
         }
     }
 
-
-
     const [formData, setFormData] = useState(initialState)
 
     function handleChange(e) {

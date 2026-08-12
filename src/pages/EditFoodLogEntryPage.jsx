@@ -1,12 +1,11 @@
 import LogFoodForm from "../components/LogFoodForm";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
 import { showEntry } from "../services/foodLogService";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function EditFoodLogEntryPage() {
 
     const { entryId } = useParams();
-    const navigate = useNavigate();
 
     const [entry, setEntry] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +26,7 @@ function EditFoodLogEntryPage() {
         fetchEntryDetails();
     }, [entryId]);
 
-    if (isLoading) return <p>Loading entry...</p>
+    if (isLoading) return<LoadingSpinner message="Loading entry..." />;
     if (error) return <p>Error: {error}</p>
     if (!entry) return <p>No entry Found</p>
 

@@ -3,6 +3,7 @@ import { showFood, favoriteFood, deleteFood } from "../services/foodService";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ConfirmModal from "../components/ConfirmModal";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function FoodDetails() {
 
@@ -29,7 +30,7 @@ function FoodDetails() {
         fetchFoodDetails();
     }, [foodId]);
 
-    if (isLoading) return <p>Loading food...</p>
+    if (isLoading) return <LoadingSpinner message="Loading food..." />;
     if (error) return <p>Error: {error}</p>
     if (!food) return <p>No Food Found</p>
 
@@ -126,7 +127,7 @@ function FoodDetails() {
 
             {showConfirm && (
                 <ConfirmModal
-                    message={`Are you sure you want to delele ${food.name}?`}
+                    message={`Are you sure you want to delete ${food.name}?`}
                     onConfirm={handleDelete}
                     onCancel={() => setShowConfirm(false)}
                 />

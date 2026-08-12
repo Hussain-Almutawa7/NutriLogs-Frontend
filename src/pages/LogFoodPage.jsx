@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { showFood } from "../services/foodService";
 import { showApiFoodDetails } from "../services/nutritionService";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function LogFoodPage({ type }) {
 
@@ -36,7 +37,7 @@ function LogFoodPage({ type }) {
 
     }, [type, foodId, externalId]);
 
-    if (isLoading) return <p>Loading food...</p>;
+    if (isLoading) return <LoadingSpinner message="Loading food..." />;;
     if (error) return <p>Error: {error}</p>;
     if (!food) return <p>Food not found.</p>;
 

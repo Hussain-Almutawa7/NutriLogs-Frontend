@@ -29,7 +29,7 @@ const getEntries = async (date) => {
 
         const data = await res.json();
 
-        if (!res.ok) throw new Error(date.err);
+        if (!res.ok) throw new Error(data.err);
 
         return data;
 

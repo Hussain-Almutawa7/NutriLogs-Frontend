@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import FoodCard from "../components/FoodCard";
 import { getFoods } from "../services/foodService";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Library() {
 
@@ -28,7 +29,7 @@ function Library() {
         fetchLibraryFood();
     }, []);
 
-    if (isLoading) return <p>Loading Library...</p>;
+    if (isLoading) return <LoadingSpinner message="Loading library..." />;;
     if (error) return <p>Error Occurred: {error}</p>;
 
     return (

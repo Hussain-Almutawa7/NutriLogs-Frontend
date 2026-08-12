@@ -51,7 +51,7 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
                 navigate("/food-log");
             }
         } catch (e) {
-            console.log(e.mesage);
+            console.log(e.message);
         }
 
     }

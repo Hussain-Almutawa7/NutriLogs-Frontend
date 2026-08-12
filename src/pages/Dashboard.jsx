@@ -4,6 +4,7 @@ import NutritionCard from "../components/NutritionCard";
 import WeeklyCaloriesChart from "../components/WeeklyCaloriesChart";
 import { formatDate } from "../utils/dateUtils";
 import { Link } from "react-router";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Dashboard({ user }) {
 
@@ -50,7 +51,7 @@ function Dashboard({ user }) {
 
     }, []);
 
-    if (isLoading) return <p>Loading Dashboard...</p>
+    if (isLoading) return <LoadingSpinner message="Loading Dashboard" />
     if (error) return <p>Error Occured: {error}</p>
     if (!summary) return <p>No Summary Details.</p>
 

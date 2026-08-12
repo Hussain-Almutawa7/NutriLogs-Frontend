@@ -4,6 +4,7 @@ import { importFood } from "../services/foodService";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function ApiFoodDetails() {
 
@@ -30,7 +31,7 @@ function ApiFoodDetails() {
         fetchFoodDetails();
     }, [externalId]);
 
-    if (isLoading) return <p>Loading food...</p>
+    if (isLoading) return <LoadingSpinner message="Loading food..." />;
     if (error) return <p>Error: {error}</p>
     if (!food) return <p>No Food Found</p>
 

@@ -2,6 +2,7 @@ import FoodForm from "../components/FoodForm";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { showFood } from "../services/foodService";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function EditFood() {
     const { foodId } = useParams();
@@ -25,7 +26,7 @@ function EditFood() {
         fetchFoodDetails();
     }, [foodId]);
 
-    if (isLoading) return <p>Loading food...</p>;
+    if (isLoading) return <LoadingSpinner message="Loading food..." />;
     if (error) return <p>{error}</p>;
     if (!food) return <p>Food not found.</p>;
 
