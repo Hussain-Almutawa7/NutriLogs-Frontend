@@ -55,7 +55,7 @@ const App = () => {
           {/* OTHER ROUTES */}
           <Route path="/browse" element={user ? <Browse /> : <Landing />} />
           <Route path="/library" element={user ? <Library /> : <Landing />} />
-          <Route path="/goals" element={user ? <UserGoals user={user} /> : <Landing />} />
+          <Route path="/goals" element={user ? <UserGoals /> : <Landing />} />
         </Routes>
       </main>
     </>

@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import { getSummary } from "../services/foodLogService";
 import { formatDate } from "../utils/dateUtils";
 import { updateGoals } from "../services/userService";
+import { useNavigate } from "react-router";
 
-function UserGoals({ user }) {
+function UserGoals() {
+
+    const navigate = useNavigate();
 
     const [userGoals, setUserGoals] = useState();
     const [error, setError] = useState("");
@@ -16,7 +19,16 @@ function UserGoals({ user }) {
         const fetchSummarygoals = async () => {
             try {
                 const summaryData = await getSummary(formatedDate);
-                setUserGoals(summaryData.goals)
+                const goals = summaryData.goals;
+
+                setUserGoals(goals);
+
+                setFormData({
+                    calorieGoal: goals.calories,
+                    proteinGoal: goals.protein,
+                    carbohydrateGoal: goals.carbohydrates,
+                    fatGoal: goals.fat,
+                });
             } catch (e) {
                 setError(e.message);
             } finally {
@@ -28,10 +40,10 @@ function UserGoals({ user }) {
     }, []);
 
     const initialState = {
-        calories: "",
-        protein: "",
-        carbohydrates: "",
-        fat: ""
+        calorieGoal: "",
+        proteinGoal: "",
+        carbohydrateGoal: "",
+        fatGoal: ""
     }
 
     const [formData, setFormData] = useState(initialState);
@@ -42,9 +54,11 @@ function UserGoals({ user }) {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        await updateGoals(formData);
+        navigate("/")
     }
 
-    if (isLoading) return <p>Loading Dashboard...</p>
+    if (isLoading) return <p>Loading user goals...</p>
     if (error) return <p>Error Occured: {error}</p>
     if (!userGoals) return <p>No Summary Details.</p>
 
@@ -60,25 +74,25 @@ function UserGoals({ user }) {
                 <form onSubmit={handleSubmit}>
                     <div className="user-goals-field">
                         <label htmlFor="calories">Calories</label>
-                        <input type="number" id="calories" name="calories" onChange={handleChange} value={userGoals.calories} />
+                        <input type="number" id="calories" name="calorieGoal" onChange={handleChange} value={formData.calorieGoal} />
                         <span>kcal per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="protein">Protein</label>
-                        <input type="number" id="protein" name="protein" onChange={handleChange} value={userGoals.protein} />
+                        <input type="number" id="protein" name="proteinGoal" onChange={handleChange} value={formData.proteinGoal} />
                         <span>g per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="carbohydrates">Carbohydrates</label>
-                        <input type="number" id="carbohydrates" name="carbohydrates" onChange={handleChange} value={userGoals.carbohydrates} />
+                        <input type="number" id="carbohydrates" name="carbohydrateGoal" onChange={handleChange} value={formData.carbohydrateGoal} />
                         <span>g per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="fat">Fat</label>
-                        <input type="number" id="fat" name="fat" onChange={handleChange} value={userGoals.fat} />
+                        <input type="number" id="fat" name="fatGoal" onChange={handleChange} value={formData.fatGoal} />
                         <span>g per day</span>
                     </div>
 
