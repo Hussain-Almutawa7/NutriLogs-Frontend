@@ -8,11 +8,10 @@ function UserGoals() {
 
     const navigate = useNavigate();
 
-    const [userGoals, setUserGoals] = useState();
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
-    const today = new Date;
+    const today = new Date();
     const formatedDate = formatDate(today);
 
     useEffect(() => {
@@ -21,14 +20,13 @@ function UserGoals() {
                 const summaryData = await getSummary(formatedDate);
                 const goals = summaryData.goals;
 
-                setUserGoals(goals);
-
                 setFormData({
                     calorieGoal: goals.calories,
                     proteinGoal: goals.protein,
                     carbohydrateGoal: goals.carbohydrates,
                     fatGoal: goals.fat,
                 });
+
             } catch (e) {
                 setError(e.message);
             } finally {
@@ -55,7 +53,14 @@ function UserGoals() {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await updateGoals(formData);
+            const goalData = {
+                calorieGoal: Number(formData.calorieGoal),
+                proteinGoal: Number(formData.proteinGoal),
+                carbohydrateGoal: Number(formData.carbohydrateGoal),
+                fatGoal: Number(formData.fatGoal),
+            };
+
+            await updateGoals(goalData);
             navigate("/");
         } catch (e) {
             setError(e.message);
@@ -64,7 +69,6 @@ function UserGoals() {
 
     if (isLoading) return <p>Loading user goals...</p>
     if (error) return <p>Error Occured: {error}</p>
-    if (!userGoals) return <p>No Summary Details.</p>
 
     return (
         <main className="user-goals">
@@ -84,19 +88,19 @@ function UserGoals() {
 
                     <div className="user-goals-field">
                         <label htmlFor="protein">Protein</label>
-                        <input type="number" id="protein" name="proteinGoal" onChange={handleChange} value={formData.proteinGoal} min={0} step={0.01} />
+                        <input type="number" id="protein" name="proteinGoal" onChange={handleChange} value={formData.proteinGoal} min={0} step={0.01} required />
                         <span>g per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="carbohydrates">Carbohydrates</label>
-                        <input type="number" id="carbohydrates" name="carbohydrateGoal" onChange={handleChange} value={formData.carbohydrateGoal} min={0} step={0.01} />
+                        <input type="number" id="carbohydrates" name="carbohydrateGoal" onChange={handleChange} value={formData.carbohydrateGoal} min={0} step={0.01} required />
                         <span>g per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="fat">Fat</label>
-                        <input type="number" id="fat" name="fatGoal" onChange={handleChange} value={formData.fatGoal} min={0} step={0.01} />
+                        <input type="number" id="fat" name="fatGoal" onChange={handleChange} value={formData.fatGoal} min={0} step={0.01} required />
                         <span>g per day</span>
                     </div>
 
