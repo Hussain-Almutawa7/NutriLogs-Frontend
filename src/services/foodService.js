@@ -1,8 +1,8 @@
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/api`
 
-const getFoods = async () => {
+const getFoods = async (query = "") => {
     try {
-        const res = await fetch(`${BASE_URL}/foods`, {
+        const res = await fetch(`${BASE_URL}/foods${query}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             },
