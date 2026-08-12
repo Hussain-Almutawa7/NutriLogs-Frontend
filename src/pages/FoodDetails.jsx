@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router";
-import { showFood, favoriteFood } from "../services/foodService";
+import { showFood, favoriteFood, deleteFood } from "../services/foodService";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
@@ -42,7 +42,16 @@ function FoodDetails() {
 
             setFood(updatedFood);
         } catch (e) {
-            setError(e);
+            setError(e.message);
+        }
+    }
+
+    const handleDelete = async () => {
+        try {
+            await deleteFood(foodId);
+            navigate("/browse")
+        } catch (e) {
+            setError(e.message)
         }
     }
 
@@ -104,7 +113,9 @@ function FoodDetails() {
                         </Link>
                     )}
 
-                    <button className="danger-button">Delete Food</button>
+                    <button className="danger-button" onClick={handleDelete}>
+                        Delete Food
+                    </button>
                 </div>
 
             </section>
