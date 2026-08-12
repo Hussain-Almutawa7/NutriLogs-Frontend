@@ -1,9 +1,20 @@
 import { Link } from "react-router";
+import { favoriteFood } from "../services/foodService";
 
-function FoodCard({ food }) {
+function FoodCard({ food, onFoodUpdated }) {
+
+    const handleFavorite = async () => {
+        try {
+            await favoriteFood(food._id, !food.isFavorite);
+            onFoodUpdated();
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
+
     return (
-        <Link to={`/foods/${food._id}`}>
-            <div className="food-card">
+        <div className="food-card">
+            <Link to={`/foods/${food._id}`}>
                 <div className="food-card-header">
                     <div>
                         <h3>{food.name}</h3>
@@ -38,8 +49,16 @@ function FoodCard({ food }) {
                     </div>
 
                 </div>
+            </Link>
+
+            <div className="food-details-actions">
+                <button onClick={handleFavorite}>{food.isFavorite ? "Unfavorite Food" : "Favorite Food"}</button>
+
+                <Link to={`/foods/${food._id}/log`}>
+                    <button>Add to Log</button>
+                </Link>
             </div>
-        </Link>
+        </div>
     )
 }
 

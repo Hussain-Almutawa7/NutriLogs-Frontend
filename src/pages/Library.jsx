@@ -10,21 +10,21 @@ function Library() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        const fetchLibraryFood = async () => {
-            try {
-                const favoriteFoodData = await getFoods("?favorite=true");
-                const customFoodData = await getFoods("?source=custom");
+    const fetchLibraryFood = async () => {
+        try {
+            const favoriteFoodData = await getFoods("?favorite=true");
+            const customFoodData = await getFoods("?source=custom");
 
-                setFavorites(favoriteFoodData);
-                setCustomFoods(customFoodData);
-            } catch (e) {
-                setError(e.message);
-            } finally {
-                setIsLoading(false);
-            }
+            setFavorites(favoriteFoodData);
+            setCustomFoods(customFoodData);
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setIsLoading(false);
         }
+    }
 
+    useEffect(() => {
         fetchLibraryFood();
     }, []);
 
@@ -46,7 +46,7 @@ function Library() {
             ) : (
                 <div className="food-log-list">
                     {favorites.map(food => (
-                        <FoodCard key={food._id} food={food} />
+                        <FoodCard key={food._id} food={food} onFoodUpdated={fetchLibraryFood} />
                     ))}
                 </div>
             )}
@@ -60,7 +60,7 @@ function Library() {
             ) : (
                 <div className="food-log-list">
                     {customFoods.map(food => (
-                        <FoodCard key={food._id} food={food} />
+                        <FoodCard key={food._id} food={food} onFoodUpdated={fetchLibraryFood} />
                     ))}
                 </div>
             )}

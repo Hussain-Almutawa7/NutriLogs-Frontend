@@ -12,18 +12,18 @@ function Browse() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchedFoods, setSearchedFoods] = useState([]);
 
-    useEffect(() => {
-        const fetchAllFoods = async () => {
-            try {
-                const libraryFoods = await getFoods();
-                setFoods(libraryFoods);
-            } catch (e) {
-                setError(e.message);
-            } finally {
-                setIsLoading(false);
-            }
+    const fetchAllFoods = async () => {
+        try {
+            const libraryFoods = await getFoods();
+            setFoods(libraryFoods);
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setIsLoading(false);
         }
+    }
 
+    useEffect(() => {
         fetchAllFoods();
     }, []);
 
@@ -102,7 +102,7 @@ function Browse() {
                 ) : (
                     <div className="food-grid">
                         {foods.map(food => (
-                            <FoodCard key={food._id} food={food} />
+                            <FoodCard key={food._id} food={food} onFoodUpdated={fetchAllFoods} />
                         ))}
                     </div>
                 )}
