@@ -54,8 +54,12 @@ function UserGoals() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        await updateGoals(formData);
-        navigate("/")
+        try {
+            await updateGoals(formData);
+            navigate("/");
+        } catch (e) {
+            setError(e.message);
+        }
     }
 
     if (isLoading) return <p>Loading user goals...</p>
@@ -74,25 +78,25 @@ function UserGoals() {
                 <form onSubmit={handleSubmit}>
                     <div className="user-goals-field">
                         <label htmlFor="calories">Calories</label>
-                        <input type="number" id="calories" name="calorieGoal" onChange={handleChange} value={formData.calorieGoal} />
+                        <input type="number" id="calories" name="calorieGoal" onChange={handleChange} value={formData.calorieGoal} min={0} step={0.01} required />
                         <span>kcal per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="protein">Protein</label>
-                        <input type="number" id="protein" name="proteinGoal" onChange={handleChange} value={formData.proteinGoal} />
+                        <input type="number" id="protein" name="proteinGoal" onChange={handleChange} value={formData.proteinGoal} min={0} step={0.01} />
                         <span>g per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="carbohydrates">Carbohydrates</label>
-                        <input type="number" id="carbohydrates" name="carbohydrateGoal" onChange={handleChange} value={formData.carbohydrateGoal} />
+                        <input type="number" id="carbohydrates" name="carbohydrateGoal" onChange={handleChange} value={formData.carbohydrateGoal} min={0} step={0.01} />
                         <span>g per day</span>
                     </div>
 
                     <div className="user-goals-field">
                         <label htmlFor="fat">Fat</label>
-                        <input type="number" id="fat" name="fatGoal" onChange={handleChange} value={formData.fatGoal} />
+                        <input type="number" id="fat" name="fatGoal" onChange={handleChange} value={formData.fatGoal} min={0} step={0.01} />
                         <span>g per day</span>
                     </div>
 
