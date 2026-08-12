@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { formatDate } from "../utils/dateUtils";
+import { formatDate } from "../../utils/dateUtils";
 import { useNavigate } from "react-router";
-import FoodLogEntryCard from "../components/FoodLogEntryCard";
-import { getEntries } from "../services/foodLogService";
+import FoodLogEntryCard from "../../components/foodLog/FoodLogEntryCard";
+import { getEntries } from "../../services/foodLogService";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 function FoodLog() {
     function getCurrentDate() {
@@ -58,7 +59,7 @@ function FoodLog() {
 
             <section className="food-log-content">
                 {isLoading ? (
-                    <p className="food-log-message">Loading Food Logs...</p>
+                    <LoadingSpinner message="Loading Food Logs..." />
                 ) : error ? (
                     <p className="food-log-message error-message">Error Occurred: {error}</p>
                 ) : entries.length === 0 ? (

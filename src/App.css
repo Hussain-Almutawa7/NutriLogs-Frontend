@@ -190,8 +190,8 @@ select:focus-visible {
 .danger-button {
   background:
     linear-gradient(135deg,
-      #fb7185,
-      #e11d48);
+      rgb(209, 69, 81),
+      rgb(196, 23, 60));
 
   border-color:
     rgba(251, 113, 133, 0.35);

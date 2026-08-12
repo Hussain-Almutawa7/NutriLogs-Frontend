@@ -1,12 +1,12 @@
 import { Link } from "react-router";
-import { favoriteFood } from "../services/foodService";
+import { favoriteFood } from "../../services/foodService";
 
 function FoodCard({ food, onFoodUpdated }) {
 
     const handleFavorite = async () => {
         try {
             await favoriteFood(food._id, !food.isFavorite);
-            onFoodUpdated();
+            onFoodUpdated?.();
         } catch (e) {
             console.log(e.message);
         }

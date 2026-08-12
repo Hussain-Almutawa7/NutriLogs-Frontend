@@ -1,7 +1,7 @@
-import LogFoodForm from "../components/LogFoodForm";
+import LogFoodForm from "../../components/food/LogFoodForm";
 import { useState, useEffect } from "react";
-import { showEntry } from "../services/foodLogService";
-import LoadingSpinner from "../components/LoadingSpinner";
+import { showEntry } from "../../services/foodLogService";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { useParams } from "react-router";
 
 function EditFoodLogEntryPage() {

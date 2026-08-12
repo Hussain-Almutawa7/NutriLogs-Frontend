@@ -1,8 +1,8 @@
-import FoodForm from "../components/FoodForm";
+import FoodForm from "../../components/food/FoodForm";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { showFood } from "../services/foodService";
-import LoadingSpinner from "../components/LoadingSpinner";
+import { showFood } from "../../services/foodService";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 function EditFood() {
     const { foodId } = useParams();

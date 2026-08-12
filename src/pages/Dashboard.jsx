@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getSummary } from "../services/foodLogService";
-import NutritionCard from "../components/NutritionCard";
-import WeeklyCaloriesChart from "../components/WeeklyCaloriesChart";
+import NutritionCard from "../components/dashboard/NutritionCard";
+import WeeklyCaloriesChart from "../components/dashboard/WeeklyCaloriesChart";
 import { formatDate } from "../utils/dateUtils";
 import { Link } from "react-router";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 function Dashboard({ user }) {
 

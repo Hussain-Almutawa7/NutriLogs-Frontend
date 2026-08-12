@@ -2,9 +2,7 @@ function WeeklyCaloriesChart({ week, calorieGoal }) {
 
     function getDayName(date) {
         const [year, month, day] = date.split("-").map(Number);
-
         const dateObject = new Date(year, month - 1, day);
-
         return dateObject.toLocaleDateString("en-US", { weekday: "short" });
     }
 

@@ -3,7 +3,7 @@ import { getSummary } from "../services/foodLogService";
 import { formatDate } from "../utils/dateUtils";
 import { updateGoals } from "../services/userService";
 import { useNavigate } from "react-router";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 function UserGoals() {
 

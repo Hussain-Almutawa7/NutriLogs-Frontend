@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { getFoods } from "../services/foodService";
-import { searchApiFoods } from "../services/nutritionService";
-import FoodCard from "../components/FoodCard";
-import ApiFoodCard from "../components/ApiFoodCard";
+import { getFoods } from "../../services/foodService";
+import { searchApiFoods } from "../../services/nutritionService";
+import FoodCard from "../../components/food/FoodCard";
+import ApiFoodCard from "../../components/food/ApiFoodCard";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 function Browse() {
 
@@ -61,7 +62,6 @@ function Browse() {
 
             {searchedFoods.length > 0 && (
                 <section className="browse-section">
-
                     <div className="browse-section-header">
                         <div>
                             <h2>Search Results</h2>
@@ -73,16 +73,10 @@ function Browse() {
                         {searchedFoods.map(apiFood => {
                             const savedFood = foods.find(food => food.source === "api" && food.externalId === apiFood.externalId)
                             return (
-                                <ApiFoodCard
-                                    key={apiFood.externalId}
-                                    apiFood={apiFood}
-                                    savedFood={savedFood}
-                                    onFoodUpdated={fetchAllFoods}
-                                />
+                                <ApiFoodCard key={apiFood.externalId} apiFood={apiFood} savedFood={savedFood} onFoodUpdated={fetchAllFoods} />
                             )
                         })}
                     </div>
-
                 </section>
             )}
 
@@ -95,10 +89,11 @@ function Browse() {
                 </div>
 
                 {isLoading ? (
-                    <p>Loading foods...</p>
+                    <LoadingSpinner message="Loading food..." />
                 ) : foods.length === 0 ? (
                     <div className="browse-empty">
-
+                        <h3>No saved foods yet</h3>
+                        <p>Create a custom food or favorite a USDA food to see it here.</p>
                     </div>
                 ) : (
                     <div className="food-grid">

@@ -1,15 +1,10 @@
 import { Link } from "react-router";
-import { favoriteFood, importFood } from "../services/foodService";
+import { favoriteFood, importFood } from "../../services/foodService";
 
 function ApiFoodCard({ apiFood, savedFood, onFoodUpdated }) {
 
-    const detailsPath = savedFood
-        ? `/foods/${savedFood._id}`
-        : `/nutrition/${apiFood.externalId}`;
-
-    const logPath = savedFood
-        ? `/foods/${savedFood._id}/log`
-        : `/nutrition/${apiFood.externalId}/log`;
+    const detailsPath = savedFood ? `/foods/${savedFood._id}` : `/nutrition/${apiFood.externalId}`;
+    const logPath = savedFood ? `/foods/${savedFood._id}/log` : `/nutrition/${apiFood.externalId}/log`;
 
     const handleFavorite = async () => {
         try {

@@ -1,25 +1,24 @@
-import { useParams } from "react-router";
-import { showApiFoodDetails } from "../services/nutritionService";
-import { importFood } from "../services/foodService";
+import { useParams, useNavigate } from "react-router";
+import { showFood, favoriteFood, deleteFood } from "../../services/foodService";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { Link } from "react-router";
-import LoadingSpinner from "../components/LoadingSpinner";
+import ConfirmModal from "../../components/common/ConfirmModal";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
-function ApiFoodDetails() {
+function FoodDetails() {
 
     const navigate = useNavigate();
-
-    const { externalId } = useParams();
+    const { foodId } = useParams();
 
     const [food, setFood] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+    const [showConfirm, setShowConfirm] = useState(false);
 
     useEffect(() => {
         const fetchFoodDetails = async () => {
             try {
-                const foodData = await showApiFoodDetails(externalId);
+                const foodData = await showFood(foodId);
                 setFood(foodData);
             } catch (e) {
                 setError(e.message);
@@ -29,18 +28,33 @@ function ApiFoodDetails() {
         }
 
         fetchFoodDetails();
-    }, [externalId]);
+    }, [foodId]);
 
     if (isLoading) return <LoadingSpinner message="Loading food..." />;
     if (error) return <p>Error: {error}</p>
     if (!food) return <p>No Food Found</p>
 
-    const handleImport = async () => {
+    const handleFavorite = async () => {
         try {
-            const importedFood = await importFood(externalId);
-            navigate(`/foods/${importedFood._id}`, { replace: true })
+            const updatedFood = await favoriteFood(foodId, !food.isFavorite);
+
+            if (updatedFood.source === "api" && updatedFood.isFavorite === false) {
+                navigate("/browse", { replace: true });
+                return;
+            }
+
+            setFood(updatedFood);
         } catch (e) {
             setError(e.message);
+        }
+    }
+
+    const handleDelete = async () => {
+        try {
+            await deleteFood(foodId);
+            navigate("/library")
+        } catch (e) {
+            setError(e.message)
         }
     }
 
@@ -56,7 +70,9 @@ function ApiFoodDetails() {
                         )}
                     </div>
 
-                    <span className="food-source-badge">USDA</span>
+                    <span className="food-source-badge">
+                        {food.source === "custom" ? "Custom" : "Saved API"}
+                    </span>
                 </div>
 
                 <div className="food-details-serving">
@@ -86,16 +102,36 @@ function ApiFoodDetails() {
                 </div>
 
                 <div className="food-details-actions">
-                    <button onClick={handleImport}>Favorite Food</button>
+                    <button onClick={handleFavorite}>{food.isFavorite ? "Unfavorite Food" : "Favorite Food"}</button>
 
-                    <Link to={`/nutrition/${externalId}/log`}>
+                    <Link to={`/foods/${foodId}/log`}>
                         <button>Add to Log</button>
                     </Link>
+
+                    {food.source === "custom" && (
+                        <>
+                            <Link to={`/foods/${foodId}/edit`}>
+                                <button>Edit Food</button>
+                            </Link>
+
+                            <button className="danger-button" onClick={() => setShowConfirm(true)}>
+                                Delete Food
+                            </button>
+                        </>
+                    )}
                 </div>
 
             </section>
+
+            {showConfirm && (
+                <ConfirmModal
+                    message={`Are you sure you want to delete ${food.name}?`}
+                    onConfirm={handleDelete}
+                    onCancel={() => setShowConfirm(false)}
+                />
+            )}
         </main>
     );
 }
 
-export default ApiFoodDetails;
+export default FoodDetails;

@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { showEntry, deleteEntry } from "../services/foodLogService";
+import { showEntry, deleteEntry } from "../../services/foodLogService";
 import { Link } from "react-router";
-import ConfirmModal from "../components/ConfirmModal";
-import LoadingSpinner from "../components/LoadingSpinner";
+import ConfirmModal from "../../components/common/ConfirmModal";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 function FoodLogEntryDetails() {
 

@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
-import FoodCard from "../components/FoodCard";
-import { getFoods } from "../services/foodService";
-import LoadingSpinner from "../components/LoadingSpinner";
+import FoodCard from "../../components/food/FoodCard";
+import { getFoods } from "../../services/foodService";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 function Library() {
 

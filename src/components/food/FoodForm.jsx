@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFood, editFood } from "../services/foodService";
+import { createFood, editFood } from "../../services/foodService";
 import { useNavigate } from "react-router";
 
 function FoodForm({ mode, foodId, food }) {

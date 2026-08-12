@@ -1,4 +1,4 @@
-import FoodForm from "../components/FoodForm";
+import FoodForm from "../../components/food/FoodForm";
 
 function CreateFood() {
     return (

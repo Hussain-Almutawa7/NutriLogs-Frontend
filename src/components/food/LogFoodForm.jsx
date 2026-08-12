@@ -1,8 +1,8 @@
-import { createEntry, editEntry } from "../services/foodLogService";
+import { createEntry, editEntry } from "../../services/foodLogService";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { formatDate } from "../utils/dateUtils";
-import { formatTime } from "../utils/timeUtils";
+import { formatDate } from "../../utils/dateUtils";
+import { formatTime } from "../../utils/timeUtils";
 
 function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
 
@@ -63,7 +63,6 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
             </h1>
 
             <form onSubmit={handleSubmit}>
-
                 <label htmlFor="consumedAmount">Consumed Amount</label>
                 <input type="number" name="consumedAmount" id="consumedAmount" onChange={handleChange} value={formData.consumedAmount} />
 
@@ -79,9 +78,7 @@ function LogFoodForm({ food, foodId, externalId, entry, entryId, mode }) {
                 <button type="submit">
                     {mode === "edit" ? "Save Changes" : "Log Food"}
                 </button>
-
             </form>
-
         </div>
     );
 }
