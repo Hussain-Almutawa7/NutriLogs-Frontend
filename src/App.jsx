@@ -17,6 +17,7 @@ import EditFoodLogEntryPage from "./pages/EditFoodLogEntryPage"
 import CreateFood from "./pages/CreateFood"
 import EditFood from "./pages/EditFood"
 import UserGoals from "./pages/UserGoals"
+import NotFound from "./pages/NotFound"
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="/browse" element={user ? <Browse /> : <Landing />} />
           <Route path="/library" element={user ? <Library /> : <Landing />} />
           <Route path="/goals" element={user ? <UserGoals /> : <Landing />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </>
