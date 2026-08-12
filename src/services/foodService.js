@@ -124,6 +124,24 @@ const editFood = async (foodId, formData) => {
     }
 }
 
+const deleteFood = async foodId => {
+    try {
+        const res = await fetch(`${BASE_URL}/foods/${foodId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+        });
+
+        if (!res.ok) {
+            const data = await res.json();
+            throw new Error(data.err);
+        }
+    } catch (e) {
+        throw Error(e.message)
+    }
+}
+
 export {
     getFoods,
     showFood,
@@ -131,4 +149,5 @@ export {
     importFood,
     createFood,
     editFood,
+    deleteFood,
 }
