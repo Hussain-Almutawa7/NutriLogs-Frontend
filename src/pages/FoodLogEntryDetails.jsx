@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { showEntry, deleteEntry } from "../services/foodLogService";
 import { Link } from "react-router";
+import ConfirmModal from "../components/ConfirmModal";
 
 function FoodLogEntryDetails() {
 
@@ -11,6 +12,7 @@ function FoodLogEntryDetails() {
     const [entry, setEntry] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+    const [showConfirm, setShowConfirm] = useState(false);
 
     useEffect(() => {
         const fetchEntryDetails = async () => {
@@ -114,12 +116,19 @@ function FoodLogEntryDetails() {
                         <button> Edit Entry</button>
                     </Link>
 
-                    <button className="danger-button" onClick={handleDelete}>
+                    <button className="danger-button" onClick={() => setShowConfirm(true)}>
                         Delete Entry
                     </button>
                 </div>
             </section>
 
+            {showConfirm && (
+                <ConfirmModal
+                    message={`Are you sure you want to delete ${entry.foodName} from your food log?`}
+                    onConfirm={handleDelete}
+                    onCancel={() => setShowConfirm(false)}
+                />
+            )}
         </main>
     );
 }
