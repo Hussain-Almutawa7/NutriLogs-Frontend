@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { getSummary } from "../services/foodLogService";
 import { formatDate } from "../utils/dateUtils";
+import { updateGoals } from "../services/userService";
 
-function UserGoals() {
+function UserGoals({ user }) {
 
     const [userGoals, setUserGoals] = useState();
     const [error, setError] = useState("");
@@ -27,10 +28,10 @@ function UserGoals() {
     }, []);
 
     const initialState = {
-        calories: userGoals.calories,
-        protein: userGoals.protein,
-        carbohydrates: userGoals.carbohydrates,
-        fat: userGoals.fat,
+        calories: "",
+        protein: "",
+        carbohydrates: "",
+        fat: ""
     }
 
     const [formData, setFormData] = useState(initialState);
@@ -53,6 +54,38 @@ function UserGoals() {
             <section className="user-goals-header">
                 <h1>Nutrition Goals</h1>
                 <p>Set your daily calorie and macronutrient goals.</p>
+            </section>
+
+            <section className="user-goals-card">
+                <form onSubmit={handleSubmit}>
+                    <div className="user-goals-field">
+                        <label htmlFor="calories">Calories</label>
+                        <input type="number" id="calories" name="calories" onChange={handleChange} value={userGoals.calories} />
+                        <span>kcal per day</span>
+                    </div>
+
+                    <div className="user-goals-field">
+                        <label htmlFor="protein">Protein</label>
+                        <input type="number" id="protein" name="protein" onChange={handleChange} value={userGoals.protein} />
+                        <span>g per day</span>
+                    </div>
+
+                    <div className="user-goals-field">
+                        <label htmlFor="carbohydrates">Carbohydrates</label>
+                        <input type="number" id="carbohydrates" name="carbohydrates" onChange={handleChange} value={userGoals.carbohydrates} />
+                        <span>g per day</span>
+                    </div>
+
+                    <div className="user-goals-field">
+                        <label htmlFor="fat">Fat</label>
+                        <input type="number" id="fat" name="fat" onChange={handleChange} value={userGoals.fat} />
+                        <span>g per day</span>
+                    </div>
+
+                    <div className="user-goals-actions">
+                        <button type="submit">Save Goals</button>
+                    </div>
+                </form>
             </section>
 
         </main>
