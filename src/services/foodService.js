@@ -90,7 +90,28 @@ const createFood = async (formData) => {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.err);
+
+        return data;
+    } catch (e) {
+        throw Error(e.message);
+    }
+}
+
+const editFood = async (foodId, formData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/foods/${foodId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(formData),
         });
 
         const data = await res.json();
@@ -109,4 +130,5 @@ export {
     favoriteFood,
     importFood,
     createFood,
+    editFood,
 }

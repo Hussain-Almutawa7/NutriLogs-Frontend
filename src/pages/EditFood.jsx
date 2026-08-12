@@ -1,6 +1,6 @@
 import FoodForm from "../components/FoodForm";
 
-function CreateFood() {
+function EditFood({}) {
     return (
         <main className="create-food">
             <section className="create-food-header">
@@ -9,10 +9,10 @@ function CreateFood() {
             </section>
 
             <section className="create-food-form">
-                <FoodForm mode="create" />
+                <FoodForm mode="edit" />
             </section>
         </main>
     );
 }
 
-export default CreateFood;
+export default EditFood;

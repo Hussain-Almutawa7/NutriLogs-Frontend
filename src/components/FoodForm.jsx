@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFood } from "../services/foodService";
 import { useNavigate } from "react-router";
 
-function FoodForm() {
+function FoodForm({ mode }) {
 
     const navigate = useNavigate();
 

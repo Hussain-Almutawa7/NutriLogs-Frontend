@@ -99,7 +99,9 @@ function FoodDetails() {
                     </Link>
 
                     {food.source === "custom" && (
-                        <button>Edit Food</button>
+                        <Link to={`/foods/${foodId}/edit`}>
+                            <button>Edit Food</button>
+                        </Link>
                     )}
 
                     <button className="danger-button">Delete Food</button>

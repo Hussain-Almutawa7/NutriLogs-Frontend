@@ -15,6 +15,7 @@ import LogFoodPage from "./pages/LogFoodPage"
 import FoodLogEntryDetails from "./pages/FoodLogEntryDetails"
 import EditFoodLogEntryPage from "./pages/EditFoodLogEntryPage"
 import CreateFood from "./pages/CreateFood"
+import EditFood from "./pages/EditFood"
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -37,17 +38,18 @@ const App = () => {
           <Route path='/sign-in' element={<SignInForm setUser={setUser} />} />
           <Route path="/" element={user ? <Dashboard user={user} /> : <Landing />} />
 
+          {/* FOOD ROUTES */}
+          <Route path="/foods/new" element={user ? <CreateFood /> : <Landing />} />
+          <Route path="/foods/:foodId" element={user ? <FoodDetails /> : <Landing />} />
+          <Route path="/foods/:foodId/edit" element={user ? <EditFood /> : <Landing />} />
+          <Route path="/nutrition/:externalId" element={user ? <ApiFoodDetails /> : <Landing />} />
+
           {/* FOOD LOGS ROUTES */}
           <Route path="/food-log" element={user ? <FoodLog /> : <Landing />} />
           <Route path="/foods/:foodId/log" element={user ? <LogFoodPage type="saved" /> : <Landing />} />
           <Route path="/nutrition/:externalId/log" element={user ? <LogFoodPage type="api" /> : <Landing />} />
           <Route path="/food-log/:entryId" element={user ? <FoodLogEntryDetails /> : <Landing />} />
           <Route path="/food-log/:entryId/edit" element={user ? <EditFoodLogEntryPage /> : <Landing />} />
-
-          {/* FOOD ROUTES */}
-          <Route path="/foods/new" element={user ? <CreateFood /> : <Landing />} />
-          <Route path="/foods/:foodId" element={user ? <FoodDetails /> : <Landing />} />
-          <Route path="/nutrition/:externalId" element={user ? <ApiFoodDetails /> : <Landing />} />
 
           {/* OTHER ROUTES */}
           <Route path="/browse" element={user ? <Browse /> : <Landing />} />
