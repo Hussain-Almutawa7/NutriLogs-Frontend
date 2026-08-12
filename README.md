@@ -8,7 +8,7 @@
 
 ### Deployed Application
 
-[NutriLogs Live Website](YOUR_DEPLOYED_FRONTEND_URL)
+[NutriLogs Live Website](https://nutritionlogs.netlify.app/)
 
 ### GitHub Repositories
 
