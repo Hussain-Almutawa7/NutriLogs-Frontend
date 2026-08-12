@@ -3,6 +3,7 @@ import { getSummary } from "../services/foodLogService";
 import NutritionCard from "../components/NutritionCard";
 import WeeklyCaloriesChart from "../components/WeeklyCaloriesChart";
 import { formatDate } from "../utils/dateUtils";
+import { Link } from "react-router";
 
 function Dashboard({ user }) {
 
@@ -59,8 +60,14 @@ function Dashboard({ user }) {
         <main className="dashboard">
 
             <section className="dashboard-header">
-                <h1>Hello {user.username}</h1>
-                <p>Here's your nutrition progress for today</p>
+                <div>
+                    <h1>Hello {user.username}</h1>
+                    <p>Here's your nutrition progress for today</p>
+                </div>
+
+                <Link to="/goals">
+                    <button>Edit Goals</button>
+                </Link>
             </section>
 
             <section className="nutrition-section">
