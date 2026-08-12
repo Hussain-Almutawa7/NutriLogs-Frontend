@@ -12,7 +12,7 @@
 
 ### GitHub Repositories
 
-[NutriLogs Frontend Repository](YOUR_FRONTEND_REPOSITORY_URL)
+[NutriLogs Frontend Repository](https://github.com/Hussain-Almutawa7/NutriLogs-Frontend)
 
 [NutriLogs Backend Repository](https://github.com/Hussain-Almutawa7/NutriLogs-Backend)
 
