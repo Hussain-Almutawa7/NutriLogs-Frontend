@@ -2,6 +2,7 @@ import LogFoodForm from "../components/LogFoodForm";
 import { useState, useEffect } from "react";
 import { showEntry } from "../services/foodLogService";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useParams } from "react-router";
 
 function EditFoodLogEntryPage() {
 
@@ -26,7 +27,7 @@ function EditFoodLogEntryPage() {
         fetchEntryDetails();
     }, [entryId]);
 
-    if (isLoading) return<LoadingSpinner message="Loading entry..." />;
+    if (isLoading) return <LoadingSpinner message="Loading entry..." />;
     if (error) return <p>Error: {error}</p>
     if (!entry) return <p>No entry Found</p>
 
