@@ -108,14 +108,16 @@ function FoodDetails() {
                     </Link>
 
                     {food.source === "custom" && (
-                        <Link to={`/foods/${foodId}/edit`}>
-                            <button>Edit Food</button>
-                        </Link>
-                    )}
+                        <>
+                            <Link to={`/foods/${foodId}/edit`}>
+                                <button>Edit Food</button>
+                            </Link>
 
-                    <button className="danger-button" onClick={handleDelete}>
-                        Delete Food
-                    </button>
+                            <button className="danger-button" onClick={handleDelete}>
+                                Delete Food
+                            </button>
+                        </>
+                    )}
                 </div>
 
             </section>
