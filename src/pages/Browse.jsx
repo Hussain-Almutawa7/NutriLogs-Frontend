@@ -77,6 +77,7 @@ function Browse() {
                                     key={apiFood.externalId}
                                     apiFood={apiFood}
                                     savedFood={savedFood}
+                                    onFoodUpdated={fetchAllFoods}
                                 />
                             )
                         })}
